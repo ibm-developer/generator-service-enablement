@@ -1,15 +1,17 @@
 package application.objectstorage;
 
+import java.util.Optional;
+
 import javax.annotation.Resource;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
-import javax.json.JsonObject;
+import javax.inject.Inject;
 
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.openstack4j.api.OSClient.OSClientV3;
 import org.openstack4j.openstack.OSFactory;
 
 import application.bluemix.InvalidCredentialsException;
-import application.bluemix.VCAPServices;
 import application.bluemix.ServiceName;
 
 public class ObjectStorage {
@@ -29,47 +31,34 @@ public class ObjectStorage {
     @Resource(lookup="objectstorage/project")
     protected String resourceProject;
 
+    @Inject
+    @ConfigProperty(name="VCAP_SERVICES")
+    Optional <ObjectStorageCredentials> osc;
+
     private static final String VERSION = "/v3";
 
     @Produces
     @ServiceName
     public OSClientV3 expose(InjectionPoint ip) throws InvalidCredentialsException {
-        ServiceName config = ip.getAnnotated().getAnnotation(ServiceName.class);
-        String serviceName = config.name();
         ObjectStorageCredentials credentials;
         try {
-          credentials = getObjectStorageCredentials(serviceName);
-          OSClientV3 os = OSFactory.builderV3()
+          credentials = getObjectStorageCredentials();
+          OSClientV3 client = OSFactory.builderV3()
                   .endpoint(credentials.getAuthUrl().toString())
                   .credentials(credentials.getUserId(), credentials.getPassword())
                   .scopeToProject(credentials.getProjectIdent(), credentials.getDomainIdent())
                   .authenticate();
-          return os;
+          return client;
         } catch (InvalidCredentialsException e) {
           return null;
         }
     }
 
-    private ObjectStorageCredentials getObjectStorageCredentials(String serviceName) throws InvalidCredentialsException {
-    	ObjectStorageCredentials credentials;
-        try {
-            credentials = getCredentialsFromVCAP(serviceName);
-        } catch (InvalidCredentialsException e) {
+    private ObjectStorageCredentials getObjectStorageCredentials() throws InvalidCredentialsException {
+    	ObjectStorageCredentials credentials=osc.orElse(null);
+        if (credentials == null) {
             credentials = new ObjectStorageCredentials(resourceAuthUrl + VERSION, resourceUserId, resourcePassword, resourceDomainName, resourceProject);
         }
         return credentials;
     }
-
-    private ObjectStorageCredentials getCredentialsFromVCAP(String serviceName) throws InvalidCredentialsException {
-        VCAPServices vcap = new VCAPServices();
-        JsonObject credentials = vcap.getCredentialsObject("Object-Storage", serviceName);
-        String userId = credentials.getJsonString("userId").getString();
-        String password = credentials.getJsonString("password").getString();
-        String auth_url = credentials.getJsonString("auth_url").getString() + VERSION;
-        String domainName = credentials.getJsonString("domainName").getString();
-        String project = credentials.getJsonString("project").getString();
-        ObjectStorageCredentials creds = new ObjectStorageCredentials(auth_url, userId, password, domainName, project);
-        return creds;
-    }
-
 }
