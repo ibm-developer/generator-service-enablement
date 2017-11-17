@@ -39,7 +39,7 @@ public class MongoClientConfig {
     @Bean
     public Mongo getMongo() throws Exception {
         MongoClientOptions.Builder mcob = null;
-        if (mongodbCACertBase64 != null && mongodbCACertBase64 != "") {
+        if (mongodbCACertBase64 != null && !mongodbCACertBase64.equals("")) {
             mcob = new MongoClientOptions.Builder()
                     .sslEnabled(true)
                     .sslContext(getSSLContext(mongodbCACertBase64));
