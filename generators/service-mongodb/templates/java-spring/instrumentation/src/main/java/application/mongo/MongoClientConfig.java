@@ -50,7 +50,6 @@ public class MongoClientConfig {
     @Bean
     public MongoTemplate mongoTemplate() throws Exception {
         MongoTemplate mt = new MongoTemplate(getMongo(), "compose");
-        LOGGER.info("mongoTemplate() exit: " + mt.getDb().getMongo().getAllAddress());
         return mt;
     }
 
@@ -71,4 +70,3 @@ public class MongoClientConfig {
     }
 
 }
-
