@@ -4,6 +4,7 @@ const yassert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 const fs = require('fs');
 const optionsBluemix = Object.assign({}, require('./resources/bluemix.json'));
+const mappings = Object.assign({}, require('./resources/mappings.json'));
 
 const GENERATOR_PATH = '../generators/app/index.js';
 const PACKAGE_JSON = 'package.json';
@@ -40,20 +41,26 @@ describe('node-express', function () {
 	});
 
 	it('Can add Apache Spark instrumentation', () => {
-		testAll('service-apache-spark', {
-			apache_spark_cluster_master_url: optionsBluemix.apacheSpark.cluster_master_url,
-			apache_spark_tenant_id: optionsBluemix.apacheSpark.tenant_id,
-			apache_spark_tenant_secret: optionsBluemix.apacheSpark.tenant_secret
+		testAll('service-apacheSpark', {
+			apacheSpark_cluster_master_url: optionsBluemix.apacheSpark.cluster_master_url,
+			apacheSpark_tenant_id: optionsBluemix.apacheSpark.tenant_id,
+			apacheSpark_tenant_secret: optionsBluemix.apacheSpark.tenant_secret
 		});
 	});
 
-	it('Can add AppID instrumentation', () => {
-		testAll('service-appid', {
-			appid_tenant_id: optionsBluemix.auth.tenantId,
-			appid_client_id: optionsBluemix.auth.clientId,
-			appid_secret: optionsBluemix.auth.secret,
-			appid_oauth_server_url: optionsBluemix.auth.oauthServerUrl,
-			appid_profiles_url: optionsBluemix.auth.profilesUrl
+	it('Can add AppID/Auth instrumentation', () => {
+		testAll('service-auth', {
+			auth_tenantId: optionsBluemix.auth.tenantId,
+			auth_clientId: optionsBluemix.auth.clientId,
+			auth_secret: optionsBluemix.auth.secret,
+			auth_oauthServerUrl: optionsBluemix.auth.oauthServerUrl,
+			auth_profilesUrl: optionsBluemix.auth.profilesUrl
+		}, {
+			auth_tenantId: mappings.auth_tenantId,
+			auth_clientId: mappings.auth_clientId,
+			auth_secret: mappings.auth_secret,
+			auth_oauthServerUrl: mappings.auth_oauthServerUrl,
+			auth_profilesUrl: mappings.auth_profilesUrl
 		});
 	});
 
@@ -62,194 +69,297 @@ describe('node-express', function () {
 			cloudant_username: optionsBluemix.cloudant[0].username,
 			cloudant_password: optionsBluemix.cloudant[0].password,
 			cloudant_url: optionsBluemix.cloudant[0].url
+		}, {
+			cloudant_username: mappings.cloudant_username,
+			cloudant_password: mappings.cloudant_password,
+			cloudant_url: mappings.cloudant_url
 		});
 	});
 
 	it('Can add ObjectStorage instrumentation', () => {
-		testAll('service-object-storage', {
-			object_storage_project_id: optionsBluemix.objectStorage[0].projectId,
-			object_storage_user_id: optionsBluemix.objectStorage[0].userId,
-			object_storage_password: optionsBluemix.objectStorage[0].password,
-			object_storage_region: optionsBluemix.objectStorage[0].region
+		testAll('service-objectStorage', {
+			objectStorage_projectId: optionsBluemix.objectStorage[0].projectId,
+			objectStorage_userId: optionsBluemix.objectStorage[0].userId,
+			objectStorage_password: optionsBluemix.objectStorage[0].password,
+			objectStorage_region: optionsBluemix.objectStorage[0].region
+		}, {
+			objectStorage_projectId: mappings.objectStorage_projectId,
+			objectStorage_userId: mappings.objectStorage_userId,
+			objectStorage_password: mappings.objectStorage_password,
+			objectStorage_region: mappings.objectStorage_region,
+			objectStorage_auth_url: mappings.objectStorage_auth_url,
+			objectStorage_project: mappings.objectStorage_project,
+			objectStorage_domainName: mappings.objectStorage_domainName
 		});
 	});
 
 	it('Can add DashDB instrumentation', () => {
-		testAll('service-dashdb', {
-			dashdb_dsn: optionsBluemix.dashDb.dsn,
-			dashdb_jdbcurl: optionsBluemix.dashDb.ssljdbcurl
+		testAll('service-dashDb', {
+			dashDb_dsn: optionsBluemix.dashDb.dsn,
+			dashDb_jdbcurl: optionsBluemix.dashDb.jdbcurl
+		}, {
+			dashDb_dsn: mappings.dashDb_dsn,
+			dashDb_jdbcurl: mappings.dashDb_jdbcurl
 		});
 	});
 
 	it('Can add DB2 instrumentation', () => {
-		testAll('service-db2', {
-			db2_dsn: optionsBluemix.db2OnCloud.dsn,
-			db2_jdbcurl: optionsBluemix.db2OnCloud.ssljdbcurl
+		testAll('service-db2OnCloud', {
+			db2OnCloud_dsn: optionsBluemix.db2OnCloud.dsn,
+			db2OnCloud_ssljdbcurl: optionsBluemix.db2OnCloud.ssljdbcurl
+		}, {
+			db2OnCloud_dsn: mappings.db2OnCloud_dsn,
+			db2OnCloud_ssljdbcurl: mappings.db2OnCloud_ssljdbcurl
 		});
 	});
 
 	it('Can add Finance - Historical Instrument Analytics instrumentation', () => {
-		testAll('service-finance-historical-instrument-analytics', {
-			finance_historical_instrument_analytics_uri: optionsBluemix.historicalInstrumentAnalytics.uri,
-			finance_historical_instrument_analytics_accesstoken: optionsBluemix.historicalInstrumentAnalytics.accessToken
+		testAll('service-historicalInstrumentAnalytics', {
+			historicalInstrumentAnalytics_uri: optionsBluemix.historicalInstrumentAnalytics.uri,
+			historicalInstrumentAnalytics_accessToken: optionsBluemix.historicalInstrumentAnalytics.accessToken
+		}, {
+			historicalInstrumentAnalytics_uri: mappings.historicalInstrumentAnalytics_uri,
+			historicalInstrumentAnalytics_accessToken: mappings.historicalInstrumentAnalytics_accessToken
 		});
+
 	});
 
 	it('Can add Finance - Instrument Analytics instrumentation', () => {
-		testAll('service-finance-instrument-analytics', {
-			finance_instrument_analytics_uri: optionsBluemix.instrumentAnalytics.uri,
-			finance_instrument_analytics_accesstoken: optionsBluemix.instrumentAnalytics.accessToken
+		testAll('service-instrumentAnalytics', {
+			instrumentAnalytics_uri: optionsBluemix.instrumentAnalytics.uri,
+			instrumentAnalytics_accessToken: optionsBluemix.instrumentAnalytics.accessToken
+		}, {
+			instrumentAnalytics_uri: mappings.instrumentAnalytics_uri,
+			instrumentAnalytics_accessToken: mappings.instrumentAnalytics_accessToken
 		});
 	});
 
 	it('Can add Finance - Investment Portfolio instrumentation', () => {
-		testAll('service-finance-investment-portfolio', {
-			finance_investment_portfolio_url: optionsBluemix.investmentPortfolio.url,
-			finance_investment_portfolio_writer_userid: optionsBluemix.investmentPortfolio.writer.userid,
-			finance_investment_portfolio_writer_password: optionsBluemix.investmentPortfolio.writer.password,
-			finance_investment_portfolio_reader_userid: optionsBluemix.investmentPortfolio.reader.userid,
-			finance_investment_portfolio_reader_password: optionsBluemix.investmentPortfolio.reader.password
+		testAll('service-investmentPortfolio', {
+			investmentPortfolio_url: optionsBluemix.investmentPortfolio.url,
+			investmentPortfolio_writer_userid: optionsBluemix.investmentPortfolio.writer.userid,
+			investmentPortfolio_writer_password: optionsBluemix.investmentPortfolio.writer.password,
+			investmentPortfolio_reader_userid: optionsBluemix.investmentPortfolio.reader.userid,
+			investmentPortfolio_reader_password: optionsBluemix.investmentPortfolio.reader.password
+		}, {
+			investmentPortfolio_url: mappings.investmentPortfolio_url,
+			investmentPortfolio_writer_userid: mappings.investmentPortfolio_writer_userid,
+			investmentPortfolio_writer_password: mappings.investmentPortfolio_writer_password,
+			investmentPortfolio_reader_userid: mappings.investmentPortfolio_reader_userid,
+			investmentPortfolio_reader_password: mappings.investmentPortfolio_reader_password
 		});
 	});
 
 	it('Can add Finance - Predictive Market Scenarios instrumentation', () => {
-		testAll('service-finance-predictive-market-scenarios', {
-			finance_predictive_market_scenarios_uri: optionsBluemix.predictiveMarketScenarios.uri,
-			finance_predictive_market_scenarios_accesstoken: optionsBluemix.predictiveMarketScenarios.accessToken
+		testAll('service-predictiveMarketScenarios', {
+			predictiveMarketScenarios_uri: optionsBluemix.predictiveMarketScenarios.uri,
+			predictiveMarketScenarios_accessToken: optionsBluemix.predictiveMarketScenarios.accessToken
+		}, {
+			predictiveMarketScenarios_uri: mappings.predictiveMarketScenarios_uri,
+			predictiveMarketScenarios_accessToken: mappings.predictiveMarketScenarios_accessToken
 		});
 	});
 
 	it('Can add Finance - Simulated Historical Instrument Analytics instrumentation', () => {
-		testAll('service-finance-simulated-historical-instrument-analytics', {
-			finance_simulated_historical_instrument_analytics_uri: optionsBluemix.simulatedHistoricalInstrumentAnalytics.uri,
-			finance_simulated_historical_instrument_analytics_accesstoken: optionsBluemix.simulatedHistoricalInstrumentAnalytics.accessToken
+		testAll('service-simulatedHistoricalInstrumentAnalytics', {
+			simulatedHistoricalInstrumentAnalytics_uri: optionsBluemix.simulatedHistoricalInstrumentAnalytics.uri,
+			simulatedHistoricalInstrumentAnalytics_accessToken: optionsBluemix.simulatedHistoricalInstrumentAnalytics.accessToken
+		}, {
+			simulatedHistoricalInstrumentAnalytics_uri: mappings.simulatedHistoricalInstrumentAnalytics_uri,
+			simulatedHistoricalInstrumentAnalytics_accessToken: mappings.simulatedHistoricalInstrumentAnalytics_accessToken
 		});
 	});
 
 	it('Can add Finance - Simulated Instrument Analytics instrumentation', () => {
-		testAll('service-finance-simulated-instrument-analytics', {
-			finance_simulated_instrument_analytics_uri: optionsBluemix.simulatedInstrumentAnalytics.uri,
-			finance_simulated_instrument_analytics_accesstoken: optionsBluemix.simulatedInstrumentAnalytics.accessToken
+		testAll('service-simulatedInstrumentAnalytics', {
+			simulatedInstrumentAnalytics_uri: optionsBluemix.simulatedInstrumentAnalytics.uri,
+			simulatedInstrumentAnalytics_accessToken: optionsBluemix.simulatedInstrumentAnalytics.accessToken
+		}, {
+			simulatedInstrumentAnalytics_uri: mappings.simulatedInstrumentAnalytics_uri,
+			simulatedInstrumentAnalytics_accessToken: mappings.simulatedInstrumentAnalytics_accessToken
 		});
 	});
 
 	it('Can add Watson - Conversation instrumentation', () => {
-		testAll('service-watson-conversation', {
-			watson_conversation_url: optionsBluemix.conversation.url,
-			watson_conversation_username: optionsBluemix.conversation.username,
-			watson_conversation_password: optionsBluemix.conversation.password
+		testAll('service-conversation', {
+			conversation_url: optionsBluemix.conversation.url,
+			conversation_username: optionsBluemix.conversation.username,
+			conversation_password: optionsBluemix.conversation.password
+		}, {
+			conversation_url: mappings.conversation_url,
+			conversation_username: mappings.conversation_username,
+			conversation_password: mappings.conversation_password
 		});
 	});
 
 	it('Can add Watson - Discovery instrumentation', () => {
-		testAll('service-watson-discovery', {
-			watson_discovery_url: optionsBluemix.discovery.url,
-			watson_discovery_username: optionsBluemix.discovery.username,
-			watson_discovery_password: optionsBluemix.discovery.password
+		testAll('service-discovery', {
+			discovery_url: optionsBluemix.discovery.url,
+			discovery_username: optionsBluemix.discovery.username,
+			discovery_password: optionsBluemix.discovery.password
+		}, {
+			discovery_url: mappings.discovery_url,
+			discovery_username: mappings.discovery_username,
+			discovery_password: mappings.discovery_password
 		});
 	});
 
 	it('Can add Watson - Document Conversion instrumentation', () => {
-		testAll('service-watson-document-conversion', {
-			watson_document_conversion_url: optionsBluemix.documentConversion.url,
-			watson_document_conversion_username: optionsBluemix.documentConversion.username,
-			watson_document_conversion_password: optionsBluemix.documentConversion.password
-
+		testAll('service-documentConversion', {
+			documentConversion_url: optionsBluemix.documentConversion.url,
+			documentConversion_username: optionsBluemix.documentConversion.username,
+			documentConversion_password: optionsBluemix.documentConversion.password
+		}, {
+			documentConversion_url: mappings.documentConversion_url,
+			documentConversion_username: mappings.documentConversion_username,
+			documentConversion_password: mappings.documentConversion_password
 		});
 	});
 
 	it('Can add Watson - Language Translator instrumentation', () => {
-		testAll('service-watson-language-translator', {
-			watson_language_translator_url: optionsBluemix.languageTranslator.url,
-			watson_language_translator_username: optionsBluemix.languageTranslator.username,
-			watson_language_translator_password: optionsBluemix.languageTranslator.password
+		testAll('service-languageTranslator', {
+			languageTranslator_url: optionsBluemix.languageTranslator.url,
+			languageTranslator_username: optionsBluemix.languageTranslator.username,
+			languageTranslator_password: optionsBluemix.languageTranslator.password
+		}, {
+			languageTranslator_url: mappings.languageTranslator_url,
+			languageTranslator_username: mappings.languageTranslator_username,
+			languageTranslator_password: mappings.languageTranslator_password
 		});
 	});
 
 	it('Can add Watson - Natural Language Classifier instrumentation', () => {
-		testAll('service-watson-natural-language-classifier', {
-			watson_natural_language_classifier_url: optionsBluemix.naturalLanguageClassifier.url,
-			watson_natural_language_classifier_username: optionsBluemix.naturalLanguageClassifier.username,
-			watson_natural_language_classifier_password: optionsBluemix.naturalLanguageClassifier.password
+		testAll('service-naturalLanguageClassifier', {
+			naturalLanguageClassifier_url: optionsBluemix.naturalLanguageClassifier.url,
+			naturalLanguageClassifier_username: optionsBluemix.naturalLanguageClassifier.username,
+			naturalLanguageClassifier_password: optionsBluemix.naturalLanguageClassifier.password
+		}, {
+			naturalLanguageClassifier_url: mappings.naturalLanguageClassifier_url,
+			naturalLanguageClassifier_username: mappings.naturalLanguageClassifier_username,
+			naturalLanguageClassifier_password: mappings.naturalLanguageClassifier_password
 		});
 	});
 
 	it('Can add Watson - Natural Language Understanding instrumentation', () => {
-		testAll('service-watson-natural-language-understanding', {
-			watson_natural_language_understanding_url: optionsBluemix.naturalLanguageUnderstanding.url,
-			watson_natural_language_understanding_username: optionsBluemix.naturalLanguageUnderstanding.username,
-			watson_natural_language_understanding_password: optionsBluemix.naturalLanguageUnderstanding.password
+		testAll('service-naturalLanguageUnderstanding', {
+			naturalLanguageUnderstanding_url: optionsBluemix.naturalLanguageUnderstanding.url,
+			naturalLanguageUnderstanding_username: optionsBluemix.naturalLanguageUnderstanding.username,
+			naturalLanguageUnderstanding_password: optionsBluemix.naturalLanguageUnderstanding.password
+		}, {
+			naturalLanguageUnderstanding_url: mappings.naturalLanguageUnderstanding_url,
+			naturalLanguageUnderstanding_username: mappings.naturalLanguageUnderstanding_username,
+			naturalLanguageUnderstanding_password: mappings.naturalLanguageUnderstanding_password
 		});
 	});
 
 	it('Can add Watson - Personality Insights instrumentation', () => {
-		testAll('service-watson-personality-insights', {
-			watson_personality_insights_url: optionsBluemix.personalityInsights.url,
-			watson_personality_insights_username: optionsBluemix.personalityInsights.username,
-			watson_personality_insights_password: optionsBluemix.personalityInsights.password
+		testAll('service-personalityInsights', {
+			personalityInsights_url: optionsBluemix.personalityInsights.url,
+			personalityInsights_username: optionsBluemix.personalityInsights.username,
+			personalityInsights_password: optionsBluemix.personalityInsights.password
+		}, {
+			personalityInsights_url: mappings.personalityInsights_url,
+			personalityInsights_username: mappings.personalityInsights_username,
+			personalityInsights_password: mappings.personalityInsights_password
 		});
 	});
 
 	it('Can add Watson - Retrieve and Rank instrumentation', () => {
-		testAll('service-watson-retrieve-and-rank', {
-			watson_retrieve_and_rank_url: optionsBluemix.retrieveAndRank.url,
-			watson_retrieve_and_rank_username: optionsBluemix.retrieveAndRank.username,
-			watson_retrieve_and_rank_password: optionsBluemix.retrieveAndRank.password,
+		testAll('service-retrieveAndRank', {
+			retrieveAndRank_url: optionsBluemix.retrieveAndRank.url,
+			retrieveAndRank_username: optionsBluemix.retrieveAndRank.username,
+			retrieveAndRank_password: optionsBluemix.retrieveAndRank.password,
+		}, {
+			retrieveAndRank_url: mappings.retrieveAndRank_url,
+			retrieveAndRank_username: mappings.retrieveAndRank_username,
+			retrieveAndRank_password: mappings.retrieveAndRank_password,
 		});
 	});
 
 	it('Can add Watson - Speech-to-Text instrumentation', () => {
-		testAll('service-watson-speech-to-text', {
-			watson_speech_to_text_url: optionsBluemix.speechToText.url,
-			watson_speech_to_text_username: optionsBluemix.speechToText.username,
-			watson_speech_to_text_password: optionsBluemix.speechToText.password,
+		testAll('service-speechToText', {
+			speechToText_url: optionsBluemix.speechToText.url,
+			speechToText_username: optionsBluemix.speechToText.username,
+			speechToText_password: optionsBluemix.speechToText.password,
+		}, {
+			speechToText_url: mappings.speechToText_url,
+			speechToText_username: mappings.speechToText_username,
+			speechToText_password: mappings.speechToText_password,
 		});
 	});
 
 	it('Can add Watson - Text-to-Speech instrumentation', () => {
-		testAll('service-watson-text-to-speech', {
-			watson_text_to_speech_url: optionsBluemix.textToSpeech.url,
-			watson_text_to_speech_username: optionsBluemix.textToSpeech.username,
-			watson_text_to_speech_password: optionsBluemix.textToSpeech.password,
+		testAll('service-textToSpeech', {
+			textToSpeech_url: optionsBluemix.textToSpeech.url,
+			textToSpeech_username: optionsBluemix.textToSpeech.username,
+			textToSpeech_password: optionsBluemix.textToSpeech.password,
+		}, {
+			textToSpeech_url: mappings.textToSpeech_url,
+			textToSpeech_username: mappings.textToSpeech_username,
+			textToSpeech_password: mappings.textToSpeech_password,
 		});
 	});
 
 	it('Can add Watson - Tone Analyzer instrumentation', () => {
-		testAll('service-watson-tone-analyzer', {
-			watson_tone_analyzer_url: optionsBluemix.toneAnalyzer.url,
-			watson_tone_analyzer_username: optionsBluemix.toneAnalyzer.username,
-			watson_tone_analyzer_password: optionsBluemix.toneAnalyzer.password,
+		testAll('service-toneAnalyzer', {
+			toneAnalyzer_url: optionsBluemix.toneAnalyzer.url,
+			toneAnalyzer_username: optionsBluemix.toneAnalyzer.username,
+			toneAnalyzer_password: optionsBluemix.toneAnalyzer.password,
+		}, {
+			toneAnalyzer_url: mappings.toneAnalyzer_url,
+			toneAnalyzer_username: mappings.toneAnalyzer_username,
+			toneAnalyzer_password: mappings.toneAnalyzer_password,
 		});
 	});
 
 	it('Can add Watson - Visual Recognition instrumentation', () => {
-		testAll('service-watson-visual-recognition', {
-			watson_visual_recognition_url: optionsBluemix.visualRecognition.url,
-			watson_visual_recognition_api_key: optionsBluemix.visualRecognition.api_key
+		testAll('service-visualRecognition', {
+			visualRecognition_url: optionsBluemix.visualRecognition.url,
+			visualRecognition_api_key: optionsBluemix.visualRecognition.api_key
+		}, {
+			visualRecognition_url: mappings.visualRecognition_url,
+			visualRecognition_api_key: mappings.visualRecognition_api_key
 		});
 	});
 
-	it('Can add Weather Company Data instrumentation', () => {
-		testAll('service-weather-company-data', {
-			weather_company_data_url: optionsBluemix.weatherInsights.url,
-			weather_company_data_username: optionsBluemix.weatherInsights.username,
-			weather_company_data_password: optionsBluemix.weatherInsights.password
+	it('Can add Weather Insights  instrumentation', () => {
+		testAll('service-weatherInsights', {
+			weatherInsights_url: optionsBluemix.weatherInsights.url,
+			weatherInsights_username: optionsBluemix.weatherInsights.username,
+			weatherInsights_password: optionsBluemix.weatherInsights.password
+		}, {
+			weatherInsights_host: mappings.weatherInsights_host,
+			weatherInsights_password: mappings.weatherInsights_password,
+			weatherInsights_port: mappings.weatherInsights_port,
+			weatherInsights_url: mappings.weatherInsights_url,
+			weatherInsights_username: mappings.weatherInsights_username,
 		});
 	});
 
 	it('Can add Push instrumentation', () => {
 		testAll('service-push', {
-			push_app_guid: optionsBluemix.push.appGuid,
-			push_app_secret: optionsBluemix.push.appSecret,
-			push_client_secret: optionsBluemix.push.clientSecret
+			push_appGuid: optionsBluemix.push.appGuid,
+			push_appSecret: optionsBluemix.push.appSecret,
+			push_clientSecret: optionsBluemix.push.clientSecret
+		}, {
+			push_appGuid: mappings.push_appGuid,
+			push_appSecret: mappings.push_appSecret,
+			push_clientSecret: mappings.push_clientSecret,
+			push_url: mappings.push_url
 		});
+
 	});
 
 	it('Can add AlertNotification instrumentation', () => {
-		testAll('service-alert-notification', {
-			alert_notification_url: optionsBluemix.alertNotification.url,
-			alert_notification_name: optionsBluemix.alertNotification.name,
-			alert_notification_password: optionsBluemix.alertNotification.password
+		testAll('service-alertNotification', {
+			alertNotification_url: optionsBluemix.alertNotification.url,
+			alertNotification_name: optionsBluemix.alertNotification.name,
+			alertNotification_password: optionsBluemix.alertNotification.password
+		}, {
+			alertNotification_url: mappings.alertNotification_url,
+			alertNotification_name: mappings.alertNotification_name,
+			alertNotification_password: mappings.alertNotification_password,
+			alertNotification_swaggerui:mappings.alertNotification_swaggerui
 		});
 	});
 
@@ -257,18 +367,32 @@ describe('node-express', function () {
 	it('Can add MongoDB instrumentation', () => {
 		testAll('service-mongodb', {
 			mongodb_uri: optionsBluemix.mongodb.uri
+		}, {
+			mongodb_db_type: mappings.mongodb_db_type,
+			mongodb_maps: mappings.mongodb_maps,
+			mongodb_name: mappings.mongodb_name,
+			mongodb_uri_cli: mappings.mongodb_uri_cli,
+			mongodb_ca_certificate_base64: mappings.mongodb_ca_certificate_base64,
+			mongodb_deployment_id: mappings.mongodb_deployment_id,
+			mongodb_uri: mappings.mongodb_uri
 		});
 	});
 
 	it('Can add Redis instrumentation', () => {
 		testAll('service-redis', {
 			redis_uri: optionsBluemix.redis.uri
+		}, {
+			redis_uri: mappings.redis_uri
 		});
 	});
 
 	it('Can add Postgre instrumentation', () => {
-		testAll('service-postgre', {
-			postgre_uri: optionsBluemix.postgresql.uri
+		testAll('service-postgresql', {
+			postgresql_uri: optionsBluemix.postgresql.uri
+		}, {
+			postgresql_uri: mappings.postgresql_uri,
+			postgresql_ca_certificate_base64: mappings.postgresql_ca_certificate_base64,
+			postgresql_deployment_id: mappings.postgresql_deployment_id
 		});
 	});
 
@@ -293,7 +417,7 @@ describe('node-express', function () {
 				yassert.noFileContent(PACKAGE_JSON, 'appid');
 				yassert.noFileContent(PACKAGE_JSON, 'cloudant');
 				yassert.noFileContent(PACKAGE_JSON, 'dashdb');
-				yassert.noFileContent(PACKAGE_JSON, 'watson-developer-cloud')
+				yassert.noFileContent(PACKAGE_JSON, 'watson-developer-cloud');
 
 				yassert.noFile(SERVER_LOCALDEV_CONFIG_JSON);
 
@@ -302,12 +426,12 @@ describe('node-express', function () {
 	})
 });
 
-function testAll(serviceName, localDevConfigJson) {
+function testAll(serviceName, localDevConfigJson, mappingsJson) {
 	testServiceDependencies(serviceName);
 	testServiceInstrumentation(serviceName);
 	testReadMe(serviceName);
-	testMappings(serviceName);
-	testLocalDevConfig(localDevConfigJson || {})
+	testMappings(mappingsJson || {});
+	testLocalDevConfig(localDevConfigJson || {});
 }
 
 function testServiceDependencies(serviceName) {
@@ -326,13 +450,12 @@ function testServiceInstrumentation(serviceName) {
 	yassert.fileContent('server/services/' + serviceName + '.js', expectedInstrumentation);
 }
 
-function testMappings(serviceName) {
-	const filePath = path.join(__dirname, "..", "generators", serviceName, "templates", "mappings.json");
-	const expectedMappings = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-	yassert.jsonFileContent(SERVER_MAPPINGS_JSON, expectedMappings);
+//TODO: Need a better way of testing this
+function testMappings(json) {
+	yassert.jsonFileContent(SERVER_MAPPINGS_JSON, json);
 }
 
-function testReadMe(serviceName){
+function testReadMe(serviceName) {
 	yassert.file('docs/services/' + serviceName + '.md');
 	const filePath = path.join(__dirname, "..", "generators", serviceName, "templates", "node", "README.md");
 	const expectedReadme = fs.readFileSync(filePath, 'utf-8');

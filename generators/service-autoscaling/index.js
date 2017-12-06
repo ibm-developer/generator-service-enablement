@@ -1,13 +1,12 @@
-'use strict'
-const BaseGenerator = require('../lib/generatorbase');
+'use strict';
 
+const BaseGenerator = require('../lib/generatorbase');
 const SCAFFOLDER_PROJECT_PROPERTY_NAME = "autoscaling";
-const SERVICE_NAME = "service-autoscaling";
-const localDevConfig = [];
+const CLOUD_FOUNDRY_SERVICE_NAME = "autoscaling";
 
 module.exports = class extends BaseGenerator {
 	constructor(args, opts) {
-		super(args, opts, SERVICE_NAME, SCAFFOLDER_PROJECT_PROPERTY_NAME, localDevConfig);
+		super(args, opts, SCAFFOLDER_PROJECT_PROPERTY_NAME, CLOUD_FOUNDRY_SERVICE_NAME);
 	}
 
 	initializing(){
@@ -21,4 +20,4 @@ module.exports = class extends BaseGenerator {
 	writing(){
 		return super.writing();
 	}
-}
+};

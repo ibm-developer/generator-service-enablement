@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 const logger = require('log4js').getLogger("generator-service-enablement:language-swift-kitura");
 const Generator = require('yeoman-generator');
 const handlebars = require('handlebars');
@@ -8,6 +8,7 @@ const Utils = require('../lib/Utils');
 
 // Load mappings between bluemix/scaffolder labels and the labels generated in the localdev-config.json files
 const bluemixLabelMappings = require('./bluemix-label-mappings.json');
+const nativeFS = require('fs');
 
 const PATH_MAPPINGS_FILE = "./config/mappings.json";
 const PATH_LOCALDEV_CONFIG_FILE = "./config/localdev-config.json";
@@ -26,6 +27,9 @@ module.exports = class extends Generator {
 	}
 
 	initializing() {
+		let bluemixKeys,
+			serviceCredentials,
+			key;
 		this.context.dependenciesFile = "dependencies.txt";
 		this.context.languageFileExt = ".swift";
 
@@ -34,28 +38,18 @@ module.exports = class extends Generator {
 		this.context.addLocalDevConfig = this._addLocalDevConfig.bind(this);
 		this.context.addReadMe = this._addReadMe.bind(this);
 		this.context.addInstrumentation = this._addInstrumentation.bind(this);
-		// Security Services
-		this.composeWith(require.resolve('../service-appid'), {context: this.context});
 
-		// Cloud Data * Storage Services
-		this.composeWith(require.resolve('../service-cloudant'), {context: this.context});
-		this.composeWith(require.resolve('../service-object-storage'), {context: this.context});
-		this.composeWith(require.resolve('../service-redis'), {context: this.context});
-		this.composeWith(require.resolve('../service-postgre'), {context: this.context});
-		this.composeWith(require.resolve('../service-mongodb'), {context: this.context});
 
-		// Watson Services
-		this.composeWith(require.resolve('../service-watson-conversation'), {context: this.context});
+		bluemixKeys = Object.keys(this.context.bluemix);
 
-		// Mobile
-		this.composeWith(require.resolve('../service-push'), {context: this.context});
-
-		// DevOps
-		this.composeWith(require.resolve('../service-alert-notification'), {context: this.context});
-		this.composeWith(require.resolve('../service-autoscaling'), {context: this.context});
-
-		// Additional services go here...
-		//TODO: Add remaining services here; see: https://ibm.box.com/s/7o7w68ydat8ape2u5dzoid89qdgh56qh
+		for(let i = 0; i < bluemixKeys.length; i++){
+			key = bluemixKeys[i];
+			serviceCredentials = Array.isArray(this.context.bluemix[key]) ? this.context.bluemix[key][0] : this.context.bluemix[key];
+			if(typeof(serviceCredentials) === 'object' && serviceCredentials.serviceInfo
+					&& nativeFS.existsSync(path.join(__dirname, '..', `service-${key}`))){
+				this.composeWith(require.resolve(`../service-${key}`), {context: this.context});
+			}
+		}
 	}
 
 	_addDependencies(serviceDependenciesString) {
@@ -95,11 +89,12 @@ module.exports = class extends Generator {
 
 	_addInstrumentation(options) {
 		function pascalize(name) {
-			return name.split('-').map(part => part.charAt(0).toUpperCase() + part.substring(1).toLowerCase()).join('');
+			return name[0].toUpperCase() + name.substring(1);
 		}
 		if (this.context.injectIntoApplication) {
-			let extension = path.extname(options.targetFileName);
-			let targetName = pascalize(path.basename(options.targetFileName, extension));
+
+			let targetName = `Service${pascalize(options.servLabel)}`//pascalize(path.basename(options.targetFileName, extension));
+
 			// Copy source file
 			let targetFilePath = this.destinationPath('Sources', 'Application', 'Services', targetName + this.context.languageFileExt);
 			this._copyHbsTpl(
@@ -111,7 +106,7 @@ module.exports = class extends Generator {
 			let metaData = this.fs.readJSON(metaFile);
 			// We expect the source file to define a function as an entry point for initialization
 			// The function should be available in the module scope and have a name of the form:
-			// 'initializeMyService()'. For example, if the targetFileName is 'service-appid.swift'
+			// 'initializeMyService()'. For example, if the targetFileName is 'service-auth.swift'
 			// then the function will be 'initializeServiceAppid()'
 			// this.context.injectIntoApplication({ service: `try initialize${targetName}()` });
 			this.context.injectIntoApplication({ service_import: `import ${metaData.import}` });
@@ -119,7 +114,7 @@ module.exports = class extends Generator {
 			this.context.injectIntoApplication({ service: `${metaData.variableName} = try initialize${targetName}(cloudEnv: cloudEnv)` });
 			// Injecting modules to Package.swift
 			if(this.context.injectModules){
-				if(metaData.variableName === 'appidService'){
+				if(metaData.variableName === 'authService'){
 					metaData.import = 'BluemixAppID';
 				}else if(metaData.variableName === 'autoScalingService'){
 					metaData.import = '';
@@ -182,7 +177,7 @@ module.exports = class extends Generator {
 		}
 
 		for (let index in credentialItems) {
-			const credentialItem = credentialItems[index]
+			const credentialItem = credentialItems[index];
 			logger.debug("-----------------------------");
 			logger.debug(credentialItem + ": " + localDevConfig[credentialItem]);
 

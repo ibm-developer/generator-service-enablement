@@ -11,8 +11,8 @@ module.exports = function(app, serviceManager){
 		throw "Invalid Push Service Region: " + region;
 	}
 
-	const appGuid = IBMCloudEnv.getString("push_app_guid");
-	const appSecret = IBMCloudEnv.getString("push_app_secret");
+	const appGuid = IBMCloudEnv.getString("push_appGuid");
+	const appSecret = IBMCloudEnv.getString("push_appSecret");
 
 	let PushNotificationInstance = new PushNotifications(region, appGuid, appSecret);
 

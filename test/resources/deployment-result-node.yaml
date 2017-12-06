@@ -28,7 +28,17 @@ spec:
               cpu: "{{ .Values.image.resources.requests.cpu }}"
               memory: "{{ .Values.image.resources.requests.memory }}"
           env:
-            - name: service_appid
+            - name: service_alertNotification
+              valueFrom:
+                secretKeyRef:
+                  name: binding-alert-notifcation-name
+                  key: binding
+            - name: service_apacheSpark
+              valueFrom:
+                secretKeyRef:
+                  name: binding-apache-spark-name
+                  key: binding
+            - name: service_auth
               valueFrom:
                 secretKeyRef:
                   name: binding-auth-name
@@ -38,145 +48,140 @@ spec:
                 secretKeyRef:
                   name: binding-cloudant-name
                   key: binding
-            - name: service_apache_spark
-              valueFrom:
-                secretKeyRef:
-                  name: binding-apache-spark-name
-                  key: binding
-            - name: service_dashdb
-              valueFrom:
-                secretKeyRef:
-                  name: binding-dashdb-name
-                  key: binding
-            - name: service_db2
-              valueFrom:
-                secretKeyRef:
-                  name: binding-db2-name
-                  key: binding
-            - name: service_object_storage
-              valueFrom:
-                secretKeyRef:
-                  name: binding-object-storage-name
-                  key: binding
-            - name: service_watson_conversation
+            - name: service_conversation
               valueFrom:
                 secretKeyRef:
                   name: binding-conversation-name
                   key: binding
-            - name: service_watson_discovery
+            - name: service_dashDb
+              valueFrom:
+                secretKeyRef:
+                  name: binding-dashdb-name
+                  key: binding
+            - name: service_db2OnCloud
+              valueFrom:
+                secretKeyRef:
+                  name: binding-db2-name
+                  key: binding
+            - name: service_discovery
               valueFrom:
                 secretKeyRef:
                   name: binding-discovery-name
                   key: binding
-            - name: service_watson_document_conversion
+            - name: service_documentConversion
               valueFrom:
                 secretKeyRef:
                   name: binding-document-conversion-name
                   key: binding
-            - name: service_watson_language_translator
-              valueFrom:
-                secretKeyRef:
-                  name: binding-language-translator-name
-                  key: binding
-            - name: service_watson_natural_language_classifier
-              valueFrom:
-                secretKeyRef:
-                  name: binding-natural-language-classifier-name
-                  key: binding
-            - name: service_watson_natural_language_understanding
-              valueFrom:
-                secretKeyRef:
-                  name: binding-natural-language-understanding-name
-                  key: binding
-            - name: service_watson_personality_insights
-              valueFrom:
-                secretKeyRef:
-                  name: binding-personality-insights-name
-                  key: binding
-            - name: service_watson_retrieve_and_rank
-              valueFrom:
-                secretKeyRef:
-                  name: binding-retrieve-and-rank-name
-                  key: binding
-            - name: service_watson_speech_to_text
-              valueFrom:
-                secretKeyRef:
-                  name: binding-speech-to-text-name
-                  key: binding
-            - name: service_watson_text_to_speech
-              valueFrom:
-                secretKeyRef:
-                  name: binding-text-to-speech-name
-                  key: binding
-            - name: service_watson_tone_analyzer
-              valueFrom:
-                secretKeyRef:
-                  name: binding-tone-analyzer-name
-                  key: binding
-            - name: service_watson_visual_recognition
-              valueFrom:
-                secretKeyRef:
-                  name: binding-visual-recognition-name
-                  key: binding
-            - name: service_finance_instrument_analytics
-              valueFrom:
-                secretKeyRef:
-                  name: binding-instrument-analytics-label
-                  key: binding
-            - name: service_finance_simulated_instrument_analytics
-              valueFrom:
-                secretKeyRef:
-                  name: binding-simulated-instrument-analytics-name
-                  key: binding
-            - name: service_finance_historical_instrument_analytics
+            - name: service_historicalInstrumentAnalytics
               valueFrom:
                 secretKeyRef:
                   name: binding-historical-instrument-analytics-name
                   key: binding
-            - name: service_finance_simulated_historical_instrument_analytics
+            - name: service_instrumentAnalytics
               valueFrom:
                 secretKeyRef:
-                  name: binding-simulated-historical-instrument-analytics-name
+                  name: binding-instrument-analytics-label
                   key: binding
-            - name: service_finance_investment_portfolio
+            - name: service_investmentPortfolio
               valueFrom:
                 secretKeyRef:
                   name: binding-investment-portfolio-name
                   key: binding
-            - name: service_finance_predictive_market_scenarios
+            - name: service_languageTranslator
               valueFrom:
                 secretKeyRef:
-                  name: binding-predictive-market-scenarios-name
-                  key: binding
-            - name: service_weather_company_data
-              valueFrom:
-                secretKeyRef:
-                  name: binding-weather-insights-name
+                  name: binding-language-translator-name
                   key: binding
             - name: service_mongodb
               valueFrom:
                 secretKeyRef:
                   name: binding-mongodb-name
                   key: binding
-            - name: service_redis
+            - name: service_naturalLanguageClassifier
               valueFrom:
                 secretKeyRef:
-                  name: binding-redis-name
+                  name: binding-natural-language-classifier-name
                   key: binding
-            - name: service_postgre
+            - name: service_naturalLanguageUnderstanding
+              valueFrom:
+                secretKeyRef:
+                  name: binding-natural-language-understanding-name
+                  key: binding
+            - name: service_objectStorage
+              valueFrom:
+                secretKeyRef:
+                  name: binding-object-storage-name
+                  key: binding
+            - name: service_personalityInsights
+              valueFrom:
+                secretKeyRef:
+                  name: binding-personality-insights-name
+                  key: binding
+            - name: service_portfolioOptimization
+              valueFrom:
+                secretKeyRef:
+                  name: binding-portfolioOptimization-name
+                  key: binding
+            - name: service_postgresql
               valueFrom:
                 secretKeyRef:
                   name: binding-postgresql-name
+                  key: binding
+            - name: service_predictiveMarketScenarios
+              valueFrom:
+                secretKeyRef:
+                  name: binding-predictive-market-scenarios-name
                   key: binding
             - name: service_push
               valueFrom:
                 secretKeyRef:
                   name: binding-push-name
                   key: binding
-            - name: service_alert_notification
+            - name: service_redis
               valueFrom:
                 secretKeyRef:
-                  name: binding-alert-notifcation-name
+                  name: binding-redis-name
+                  key: binding
+            - name: service_retrieveAndRank
+              valueFrom:
+                secretKeyRef:
+                  name: binding-retrieve-and-rank-name
+                  key: binding
+            - name: service_simulatedHistoricalInstrumentAnalytics
+              valueFrom:
+                secretKeyRef:
+                  name: binding-simulated-historical-instrument-analytics-name
+                  key: binding
+            - name: service_simulatedInstrumentAnalytics
+              valueFrom:
+                secretKeyRef:
+                  name: binding-simulated-instrument-analytics-name
+                  key: binding
+            - name: service_speechToText
+              valueFrom:
+                secretKeyRef:
+                  name: binding-speech-to-text-name
+                  key: binding
+            - name: service_textToSpeech
+              valueFrom:
+                secretKeyRef:
+                  name: binding-text-to-speech-name
+                  key: binding
+            - name: service_toneAnalyzer
+              valueFrom:
+                secretKeyRef:
+                  name: binding-tone-analyzer-name
+                  key: binding
+            - name: service_visualRecognition
+              valueFrom:
+                secretKeyRef:
+                  name: binding-visual-recognition-name
+                  key: binding
+            - name: service_weatherInsights
+              valueFrom:
+                secretKeyRef:
+                  name: binding-weather-insights-name
                   key: binding
             - name: PORT
               value: "{{ .Values.service.servicePort }}"

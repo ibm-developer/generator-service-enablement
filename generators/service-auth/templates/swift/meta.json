@@ -1,0 +1,6 @@
+{
+  "import":"class Credentials.Credentials",
+  "variableName":"authService",
+  "type":"Credentials",
+  "initParams":"cloudEnv: cloudEnv"
+}
