@@ -4,7 +4,7 @@ import os, base64
 
 def getService(app):
 	mongoConnect = IBMCloudEnv.getString('mongodb_uri')
-	mongoCert = IBMCloudEnv.getString('mongodb_ca')
+	mongoCert = IBMCloudEnv.getString('mongodb_ca_certificate_base64')
 
 	fileDir = os.path.dirname(os.path.realpath(__file__))
 	certDir = fileDir + '/certificates'

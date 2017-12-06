@@ -1,12 +1,12 @@
 {
   "cloudant": "cloudant",
-  "objectStorage": "object_storage",
-  "auth": "appid",
-  "conversation": "watson_conversation",
+  "objectStorage": "objectStorage",
+  "auth": "auth",
+  "conversation": "conversation",
   "redis": "redis",
-  "alertNotification": "alert_notification",
+  "alertNotification": "alertNotification",
   "push": "push",
   "Auto-Scaling": "autoscaling",
   "mongodb": "mongodb",
-  "postgresql": "postgre"
+  "postgresql": "postgresql"
 }

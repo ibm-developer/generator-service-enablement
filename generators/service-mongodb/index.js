@@ -1,12 +1,11 @@
-'use strict'
+'use strict';
 const BaseGenerator = require('../lib/generatorbase');
 const SCAFFOLDER_PROJECT_PROPERTY_NAME = "mongodb";
-const SERVICE_NAME = "service-mongodb";
-const localDevConfig = ['uri', 'ca_certificate_base64'];
+const CLOUD_FOUNDRY_SERVICE_NAME = "compose-for-mongodb";
 
 module.exports = class extends BaseGenerator {
 	constructor(args, opts) {
-		super(args, opts, SERVICE_NAME, SCAFFOLDER_PROJECT_PROPERTY_NAME, localDevConfig);
+		super(args, opts, SCAFFOLDER_PROJECT_PROPERTY_NAME, CLOUD_FOUNDRY_SERVICE_NAME);
 	}
 
 	initializing(){

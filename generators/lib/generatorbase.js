@@ -1,4 +1,3 @@
-
 /*
  * Copyright IBM Corporation 2017
  *
@@ -18,22 +17,21 @@
 
 const log4js = require('log4js');
 const Generator = require('yeoman-generator');
-const Handlebars = require('handlebars');
 const fs = require('fs');
-const lodash = require('lodash/string');
+const Handlebars = require('handlebars');
 
 const REGEX_HYPHEN = /-/g;
 
 module.exports = class extends Generator {
-	constructor(args, opts, serviceName, scaffolderName, localDevConfig) {
+	constructor(args, opts, scaffolderName, cloudFoundryName) {
 		super(args, opts);
 		this.scaffolderName = scaffolderName;
-		this.serviceName = serviceName;
-		this.logger = log4js.getLogger("generator-service-enablement:" + serviceName);
+		this.cloudFoundryName = cloudFoundryName;
+		this.logger = log4js.getLogger("generator-service-enablement:" + scaffolderName);
 		this.context = opts.context;
+		this.serviceName = `service-${scaffolderName}`;
 		this.logger.setLevel(this.context.loggerLevel);
 		this.languageTemplatePath = this.templatePath() + "/" + this.context.language;
-		this.localDevConfig = localDevConfig;
 	}
 
 	initializing() {
@@ -53,7 +51,7 @@ module.exports = class extends Generator {
 		this._addInstrumentation();
 
 		let serviceInfo = this._getServiceInfo();
-		if(serviceInfo !== undefined ){
+		if (serviceInfo !== undefined) {
 			this._addServicesToKubeDeploy(serviceInfo);
 			this._addServicesToPipeline(serviceInfo);
 		}
@@ -69,7 +67,7 @@ module.exports = class extends Generator {
 		return name;
 	}
 
-	_getServiceInfo(){
+	_getServiceInfo() {
 		let serviceInfo = {};
 		if (this.context.bluemix[this.scaffolderName]) {
 			let service = this.context.bluemix[this.scaffolderName];
@@ -81,15 +79,16 @@ module.exports = class extends Generator {
 		}
 		return serviceInfo;
 	}
-	_addServicesToPipeline(serviceInfo){
-		if(!this.context.servicesInfo){
+
+	_addServicesToPipeline(serviceInfo) {
+		if (!this.context.servicesInfo) {
 			this.context.servicesInfo = [];
 		}
 		this.context.servicesInfo.push(serviceInfo);
 	}
 
 	_addServicesToKubeDeploy(serviceInfo) {
-		this.logger.info(`adding Deployment service env info for ${this.serviceName}`);
+		this.logger.info(`adding Deployment service env info for ${this.scaffolderName}`);
 
 		let serviceEnv = {
 			name: this._sanitizeServiceName(this.serviceName),
@@ -110,11 +109,11 @@ module.exports = class extends Generator {
 
 	_addDependencies() {
 		this.logger.info("Adding dependencies");
-		if (Array.isArray(this.context.dependenciesFile)){
+		if (Array.isArray(this.context.dependenciesFile)) {
 			for (let i = 0; i < this.context.dependenciesFile.length; i++) {
 				this.context.addDependencies(this.fs.read(this.languageTemplatePath + "/" + this.context.dependenciesFile[i]));
 			}
-		}else{
+		} else {
 			let dependenciesString = this.fs.read(this.languageTemplatePath + "/" + this.context.dependenciesFile);
 			if (this.context.dependenciesFile.endsWith('.template')) {			//pass through handlebars if this is a .template file
 				let template = Handlebars.compile(dependenciesString);
@@ -126,30 +125,37 @@ module.exports = class extends Generator {
 
 	_addMappings() {
 		this.logger.info("Adding mappings");
-		let mappings = this.fs.readJSON(this.templatePath() + "/mappings.json");
+		let key = '',
+			mappings = {};
+
+		let serviceCredentials = Array.isArray(this.context.bluemix[this.scaffolderName])
+			? this.context.bluemix[this.scaffolderName][0] : this.context.bluemix[this.scaffolderName];
+		let credentialKeys = Object.keys(serviceCredentials);
+		for (let i = 0; i < credentialKeys.length; i++) {
+			key = credentialKeys[i];
+			if (key !== 'serviceInfo') {
+				mappings[`${this.scaffolderName}_${key}`] = {};
+				mappings[`${this.scaffolderName}_${key}`].searchPatterns = [
+					`cloudfoundry:$['${this.cloudFoundryName}'][0].credentials.${key}`,
+					`env:service_${this.scaffolderName}:$.${key}`,
+					`file:/server/localdev-config.json:$.${this.scaffolderName}_${key}`
+				]
+			}
+		}
 		this.context.addMappings(mappings);
 	}
 
 	_addLocalDevConfig() {
 		this.logger.info("Adding local dev config");
-		let templatePath = this.templatePath() + "/localdev-config.json.template";
-		let templateContent = this.fs.read(templatePath);
-		let template = Handlebars.compile(templateContent);
-		let data = {};			//data to use for templating
-		this.localDevConfig.forEach(item => {
-			let name = lodash.camelCase(item);
-			let bxvalue = this.context.bluemix[this.scaffolderName];
-			if (Array.isArray(bxvalue)) {
-				bxvalue = bxvalue[0];		//set to first entry in the array
-			}
-			let path = item.split('.');
-			for (let i = 0; i < path.length - 1; bxvalue = bxvalue[path[i++]]);
-			data[name] = bxvalue[path[path.length - 1]];
-		});
-		this.logger.debug("local dev config", data);
-		let localDevConfigString = template(data);
-		this.context.addLocalDevConfig(JSON.parse(localDevConfigString));
+		let templateContent;
+
+		let serviceCredentials = Array.isArray(this.context.bluemix[this.scaffolderName])
+			? this.context.bluemix[this.scaffolderName][0] : this.context.bluemix[this.scaffolderName];
+		templateContent = this._setCredentialMapping({}, serviceCredentials, this.scaffolderName);
+
+		this.context.addLocalDevConfig(templateContent);
 	}
+
 
 	_addInstrumentation() {
 		this.logger.info("Adding instrumentation");
@@ -166,6 +172,24 @@ module.exports = class extends Generator {
 			sourceFilePath: this.languageTemplatePath + "/README.md",
 			targetFileName: this.serviceName + ".md"
 		});
+	}
+
+	_setCredentialMapping(templateContent, serviceCredentials, currentKey) {
+		let key,
+			keys = Object.keys(serviceCredentials);
+		for (let i = 0; i < keys.length; i++) {
+			key = keys[i];
+			if(typeof(serviceCredentials[key]) === 'object' && key !== 'serviceInfo'){
+				templateContent = this._setCredentialMapping(templateContent, serviceCredentials[key], `${this.scaffolderName}_${key}`);
+				continue;
+			}
+
+			if (key !== 'serviceInfo') {
+				templateContent[`${currentKey}_${key}`] = serviceCredentials[key];
+			}
+		}
+
+		return templateContent;
 	}
 
 
