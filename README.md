@@ -64,7 +64,7 @@ yo ibm-service-enablement
 
 ## Testing
 
-To run the unit tests
+To run the unit tests, inside the `generator-ibm-service-enablement` directory run:
 
 `npm test`
 
