@@ -21,7 +21,7 @@ import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.PathNotFoundException;
 
 public class CloudServices {
-
+    
     private static final Logger LOGGER  = Logger.getLogger(CloudServices.class.getName());
     private static final String MAPPINGS_JSON = "/mappings.json";
     private static final String VCAP_SERVICES = "VCAP_SERVICES";
@@ -29,10 +29,10 @@ public class CloudServices {
     
     /** Internal configuration read from MAPPINGS_JSON */
     private JsonObject config = null;
-
+    
     /** used to cache resources loaded during processing */
     private final ConcurrentMap<String, DocumentContext> resourceCache = new ConcurrentHashMap<>();
-
+    
     private static class SingletonHelper {
         private static final CloudServices INSTANCE;
         static {
@@ -40,18 +40,18 @@ public class CloudServices {
             INSTANCE.config = INSTANCE.getJson(MAPPINGS_JSON);
         }
     }
-
+    
     /**
      * Create a cloud services mapping object from mappings.json
-     * 
+     *
      * @return the configured service mapper
      */
     public static CloudServices fromMappings() {
         return SingletonHelper.INSTANCE;
     }
-
+    
     private CloudServices() {};
-
+    
     private JsonObject getJson(String path) {
         LOGGER.finest("getMappings()");
         JsonObject mappings = null;
@@ -67,7 +67,7 @@ public class CloudServices {
         LOGGER.finest("getMappings() returned: " + mappings);
         return mappings;
     }
-
+    
     public Set<String> getKeys() {
         if(config == null) {
             return null;    //config wasn't initialised for some reason, so cannot resolve anything
@@ -91,10 +91,11 @@ public class CloudServices {
         }
         JsonObject node = config.getJsonObject(name);
         if(node == null || node.isEmpty()) {
-            return null; //specified name could not be located    
+            return null; //specified name could not be located
         }
         String value = null;
-        JsonArray array = node.getJsonArray("searchPatterns");
+        JsonObject nodeCredentials = node.getJsonObject("credentials");
+        JsonArray array = nodeCredentials.getJsonArray("searchPatterns");
         if (array != null) {
             for (final JsonValue entryNode : array) {
                 String entry = sanitiseString(entryNode.toString());
@@ -127,7 +128,7 @@ public class CloudServices {
         }
         return value;
     }
-
+    
     private String[] parseOnfirst(String entry, String delimiter) {
         String token[] = {"",""};
         int i = entry.indexOf(delimiter);
@@ -137,7 +138,7 @@ public class CloudServices {
         }
         return token;
     }
-
+    
     private String getJsonValue(String jsonPath, String json) {
         String value = null;
         if (jsonPath != null && json != null) {
@@ -153,7 +154,7 @@ public class CloudServices {
             return null;
         return getJsonValue(target, System.getenv(VCAP_SERVICES));
     }
-
+    
     private String getEnvValue(String target) {
         String value = null;
         if (target.contains(":")) {
@@ -171,7 +172,7 @@ public class CloudServices {
         }
         return value;
     }
-
+    
     private String getFileValue(String target) {
         String value = null;
         if (target.contains(":")) {
@@ -182,7 +183,7 @@ public class CloudServices {
                     DocumentContext context = resourceCache.computeIfAbsent(path, filePath -> getJsonStringFromFile(filePath));
                     value = context.read(token[1]);
                 } catch (PathNotFoundException e) {
-                    return null;	//no data matching the specified json path
+                    return null;    //no data matching the specified json path
                 }
             }
         }
@@ -201,14 +202,14 @@ public class CloudServices {
     }
     
     //end search pattern resolvers
-
-    private DocumentContext getJsonStringFromFile(String filePath) { 
+    
+    private DocumentContext getJsonStringFromFile(String filePath) {
         String json = null;
         if (filePath != null && !filePath.isEmpty()) {
             if(filePath.startsWith(CLASSPATH_ID)) {
                 //treat file:/server as a classpath resource
                 String path = filePath.substring(CLASSPATH_ID.length() - 1);
-
+                
                 LOGGER.finest("Looking for classpath resource : " + path);
                 JsonObject node = getJson(path);
                 if(node != null) {
@@ -229,7 +230,7 @@ public class CloudServices {
         }
         return JsonPath.parse(json);
     }
-
+    
     
     private String sanitiseString(String data) throws CloudServicesException {
         if (data == null || data.isEmpty()) {
@@ -242,6 +243,6 @@ public class CloudServices {
         }
         return data;
     }
-
+    
 }
 
