@@ -1,870 +1,1118 @@
 {
   "alertNotification_name": {
-    "searchPatterns": [
-      "cloudfoundry:$['alertnotification'][0].credentials.name",
-      "env:service_alertNotification:$.name",
-      "file:/server/localdev-config.json:$.alertNotification_name"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['alertnotification'][0].credentials.name",
+        "env:service_alertNotification:$.name",
+        "file:/server/localdev-config.json:$.alertNotification_name"
+      ]
+    }
   },
   "alertNotification_password": {
-    "searchPatterns": [
-      "cloudfoundry:$['alertnotification'][0].credentials.password",
-      "env:service_alertNotification:$.password",
-      "file:/server/localdev-config.json:$.alertNotification_password"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['alertnotification'][0].credentials.password",
+        "env:service_alertNotification:$.password",
+        "file:/server/localdev-config.json:$.alertNotification_password"
+      ]
+    }
   },
   "alertNotification_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['alertnotification'][0].credentials.url",
-      "env:service_alertNotification:$.url",
-      "file:/server/localdev-config.json:$.alertNotification_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['alertnotification'][0].credentials.url",
+        "env:service_alertNotification:$.url",
+        "file:/server/localdev-config.json:$.alertNotification_url"
+      ]
+    }
   },
   "alertNotification_swaggerui": {
-    "searchPatterns": [
-      "cloudfoundry:$['alertnotification'][0].credentials.swaggerui",
-      "env:service_alertNotification:$.swaggerui",
-      "file:/server/localdev-config.json:$.alertNotification_swaggerui"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['alertnotification'][0].credentials.swaggerui",
+        "env:service_alertNotification:$.swaggerui",
+        "file:/server/localdev-config.json:$.alertNotification_swaggerui"
+      ]
+    }
   },
   "apacheSpark_cluster_master_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['spark'][0].credentials.cluster_master_url",
-      "env:service_apacheSpark:$.cluster_master_url",
-      "file:/server/localdev-config.json:$.apacheSpark_cluster_master_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['spark'][0].credentials.cluster_master_url",
+        "env:service_apacheSpark:$.cluster_master_url",
+        "file:/server/localdev-config.json:$.apacheSpark_cluster_master_url"
+      ]
+    }
   },
   "apacheSpark_instance_id": {
-    "searchPatterns": [
-      "cloudfoundry:$['spark'][0].credentials.instance_id",
-      "env:service_apacheSpark:$.instance_id",
-      "file:/server/localdev-config.json:$.apacheSpark_instance_id"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['spark'][0].credentials.instance_id",
+        "env:service_apacheSpark:$.instance_id",
+        "file:/server/localdev-config.json:$.apacheSpark_instance_id"
+      ]
+    }
   },
   "apacheSpark_plan": {
-    "searchPatterns": [
-      "cloudfoundry:$['spark'][0].credentials.plan",
-      "env:service_apacheSpark:$.plan",
-      "file:/server/localdev-config.json:$.apacheSpark_plan"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['spark'][0].credentials.plan",
+        "env:service_apacheSpark:$.plan",
+        "file:/server/localdev-config.json:$.apacheSpark_plan"
+      ]
+    }
   },
   "apacheSpark_tenant_id": {
-    "searchPatterns": [
-      "cloudfoundry:$['spark'][0].credentials.tenant_id",
-      "env:service_apacheSpark:$.tenant_id",
-      "file:/server/localdev-config.json:$.apacheSpark_tenant_id"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['spark'][0].credentials.tenant_id",
+        "env:service_apacheSpark:$.tenant_id",
+        "file:/server/localdev-config.json:$.apacheSpark_tenant_id"
+      ]
+    }
   },
   "apacheSpark_tenant_id_full": {
-    "searchPatterns": [
-      "cloudfoundry:$['spark'][0].credentials.tenant_id_full",
-      "env:service_apacheSpark:$.tenant_id_full",
-      "file:/server/localdev-config.json:$.apacheSpark_tenant_id_full"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['spark'][0].credentials.tenant_id_full",
+        "env:service_apacheSpark:$.tenant_id_full",
+        "file:/server/localdev-config.json:$.apacheSpark_tenant_id_full"
+      ]
+    }
   },
   "apacheSpark_tenant_secret": {
-    "searchPatterns": [
-      "cloudfoundry:$['spark'][0].credentials.tenant_secret",
-      "env:service_apacheSpark:$.tenant_secret",
-      "file:/server/localdev-config.json:$.apacheSpark_tenant_secret"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['spark'][0].credentials.tenant_secret",
+        "env:service_apacheSpark:$.tenant_secret",
+        "file:/server/localdev-config.json:$.apacheSpark_tenant_secret"
+      ]
+    }
   },
   "auth_clientId": {
-    "searchPatterns": [
-      "cloudfoundry:$['AppID'][0].credentials.clientId",
-      "env:service_auth:$.clientId",
-      "file:/server/localdev-config.json:$.auth_clientId"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['AppID'][0].credentials.clientId",
+        "env:service_auth:$.clientId",
+        "file:/server/localdev-config.json:$.auth_clientId"
+      ]
+    }
   },
   "auth_oauthServerUrl": {
-    "searchPatterns": [
-      "cloudfoundry:$['AppID'][0].credentials.oauthServerUrl",
-      "env:service_auth:$.oauthServerUrl",
-      "file:/server/localdev-config.json:$.auth_oauthServerUrl"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['AppID'][0].credentials.oauthServerUrl",
+        "env:service_auth:$.oauthServerUrl",
+        "file:/server/localdev-config.json:$.auth_oauthServerUrl"
+      ]
+    }
   },
   "auth_profilesUrl": {
-    "searchPatterns": [
-      "cloudfoundry:$['AppID'][0].credentials.profilesUrl",
-      "env:service_auth:$.profilesUrl",
-      "file:/server/localdev-config.json:$.auth_profilesUrl"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['AppID'][0].credentials.profilesUrl",
+        "env:service_auth:$.profilesUrl",
+        "file:/server/localdev-config.json:$.auth_profilesUrl"
+      ]
+    }
   },
   "auth_secret": {
-    "searchPatterns": [
-      "cloudfoundry:$['AppID'][0].credentials.secret",
-      "env:service_auth:$.secret",
-      "file:/server/localdev-config.json:$.auth_secret"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['AppID'][0].credentials.secret",
+        "env:service_auth:$.secret",
+        "file:/server/localdev-config.json:$.auth_secret"
+      ]
+    }
   },
   "auth_tenantId": {
-    "searchPatterns": [
-      "cloudfoundry:$['AppID'][0].credentials.tenantId",
-      "env:service_auth:$.tenantId",
-      "file:/server/localdev-config.json:$.auth_tenantId"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['AppID'][0].credentials.tenantId",
+        "env:service_auth:$.tenantId",
+        "file:/server/localdev-config.json:$.auth_tenantId"
+      ]
+    }
   },
   "auth_version": {
-    "searchPatterns": [
-      "cloudfoundry:$['AppID'][0].credentials.version",
-      "env:service_auth:$.version",
-      "file:/server/localdev-config.json:$.auth_version"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['AppID'][0].credentials.version",
+        "env:service_auth:$.version",
+        "file:/server/localdev-config.json:$.auth_version"
+      ]
+    }
   },
   "cloudant_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['cloudantNoSQLDB'][0].credentials.url",
-      "env:service_cloudant:$.url",
-      "file:/server/localdev-config.json:$.cloudant_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['cloudantNoSQLDB'][0].credentials.url",
+        "env:service_cloudant:$.url",
+        "file:/server/localdev-config.json:$.cloudant_url"
+      ]
+    }
   },
   "cloudant_username": {
-    "searchPatterns": [
-      "cloudfoundry:$['cloudantNoSQLDB'][0].credentials.username",
-      "env:service_cloudant:$.username",
-      "file:/server/localdev-config.json:$.cloudant_username"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['cloudantNoSQLDB'][0].credentials.username",
+        "env:service_cloudant:$.username",
+        "file:/server/localdev-config.json:$.cloudant_username"
+      ]
+    }
   },
   "cloudant_password": {
-    "searchPatterns": [
-      "cloudfoundry:$['cloudantNoSQLDB'][0].credentials.password",
-      "env:service_cloudant:$.password",
-      "file:/server/localdev-config.json:$.cloudant_password"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['cloudantNoSQLDB'][0].credentials.password",
+        "env:service_cloudant:$.password",
+        "file:/server/localdev-config.json:$.cloudant_password"
+      ]
+    }
   },
   "conversation_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['conversation'][0].credentials.url",
-      "env:service_conversation:$.url",
-      "file:/server/localdev-config.json:$.conversation_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['conversation'][0].credentials.url",
+        "env:service_conversation:$.url",
+        "file:/server/localdev-config.json:$.conversation_url"
+      ]
+    }
   },
   "conversation_username": {
-    "searchPatterns": [
-      "cloudfoundry:$['conversation'][0].credentials.username",
-      "env:service_conversation:$.username",
-      "file:/server/localdev-config.json:$.conversation_username"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['conversation'][0].credentials.username",
+        "env:service_conversation:$.username",
+        "file:/server/localdev-config.json:$.conversation_username"
+      ]
+    }
   },
   "conversation_password": {
-    "searchPatterns": [
-      "cloudfoundry:$['conversation'][0].credentials.password",
-      "env:service_conversation:$.password",
-      "file:/server/localdev-config.json:$.conversation_password"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['conversation'][0].credentials.password",
+        "env:service_conversation:$.password",
+        "file:/server/localdev-config.json:$.conversation_password"
+      ]
+    }
   },
   "dashDb_db": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB'][0].credentials.db",
-      "env:service_dashDb:$.db",
-      "file:/server/localdev-config.json:$.dashDb_db"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB'][0].credentials.db",
+        "env:service_dashDb:$.db",
+        "file:/server/localdev-config.json:$.dashDb_db"
+      ]
+    }
   },
   "dashDb_dsn": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB'][0].credentials.dsn",
-      "env:service_dashDb:$.dsn",
-      "file:/server/localdev-config.json:$.dashDb_dsn"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB'][0].credentials.dsn",
+        "env:service_dashDb:$.dsn",
+        "file:/server/localdev-config.json:$.dashDb_dsn"
+      ]
+    }
   },
   "dashDb_host": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB'][0].credentials.host",
-      "env:service_dashDb:$.host",
-      "file:/server/localdev-config.json:$.dashDb_host"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB'][0].credentials.host",
+        "env:service_dashDb:$.host",
+        "file:/server/localdev-config.json:$.dashDb_host"
+      ]
+    }
   },
   "dashDb_hostname": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB'][0].credentials.hostname",
-      "env:service_dashDb:$.hostname",
-      "file:/server/localdev-config.json:$.dashDb_hostname"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB'][0].credentials.hostname",
+        "env:service_dashDb:$.hostname",
+        "file:/server/localdev-config.json:$.dashDb_hostname"
+      ]
+    }
   },
   "dashDb_https_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB'][0].credentials.https_url",
-      "env:service_dashDb:$.https_url",
-      "file:/server/localdev-config.json:$.dashDb_https_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB'][0].credentials.https_url",
+        "env:service_dashDb:$.https_url",
+        "file:/server/localdev-config.json:$.dashDb_https_url"
+      ]
+    }
   },
   "dashDb_jdbcurl": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB'][0].credentials.jdbcurl",
-      "env:service_dashDb:$.jdbcurl",
-      "file:/server/localdev-config.json:$.dashDb_jdbcurl"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB'][0].credentials.jdbcurl",
+        "env:service_dashDb:$.jdbcurl",
+        "file:/server/localdev-config.json:$.dashDb_jdbcurl"
+      ]
+    }
   },
   "dashDb_password": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB'][0].credentials.password",
-      "env:service_dashDb:$.password",
-      "file:/server/localdev-config.json:$.dashDb_password"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB'][0].credentials.password",
+        "env:service_dashDb:$.password",
+        "file:/server/localdev-config.json:$.dashDb_password"
+      ]
+    }
   },
   "dashDb_port": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB'][0].credentials.port",
-      "env:service_dashDb:$.port",
-      "file:/server/localdev-config.json:$.dashDb_port"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB'][0].credentials.port",
+        "env:service_dashDb:$.port",
+        "file:/server/localdev-config.json:$.dashDb_port"
+      ]
+    }
   },
   "dashDb_ssldsn": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB'][0].credentials.ssldsn",
-      "env:service_dashDb:$.ssldsn",
-      "file:/server/localdev-config.json:$.dashDb_ssldsn"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB'][0].credentials.ssldsn",
+        "env:service_dashDb:$.ssldsn",
+        "file:/server/localdev-config.json:$.dashDb_ssldsn"
+      ]
+    }
   },
   "dashDb_ssljdbcurl": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB'][0].credentials.ssljdbcurl",
-      "env:service_dashDb:$.ssljdbcurl",
-      "file:/server/localdev-config.json:$.dashDb_ssljdbcurl"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB'][0].credentials.ssljdbcurl",
+        "env:service_dashDb:$.ssljdbcurl",
+        "file:/server/localdev-config.json:$.dashDb_ssljdbcurl"
+      ]
+    }
   },
   "dashDb_uri": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB'][0].credentials.uri",
-      "env:service_dashDb:$.uri",
-      "file:/server/localdev-config.json:$.dashDb_uri"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB'][0].credentials.uri",
+        "env:service_dashDb:$.uri",
+        "file:/server/localdev-config.json:$.dashDb_uri"
+      ]
+    }
   },
   "dashDb_username": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB'][0].credentials.username",
-      "env:service_dashDb:$.username",
-      "file:/server/localdev-config.json:$.dashDb_username"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB'][0].credentials.username",
+        "env:service_dashDb:$.username",
+        "file:/server/localdev-config.json:$.dashDb_username"
+      ]
+    }
   },
   "db2OnCloud_db": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB For Transactions'][0].credentials.db",
-      "env:service_db2OnCloud:$.db",
-      "file:/server/localdev-config.json:$.db2OnCloud_db"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB For Transactions'][0].credentials.db",
+        "env:service_db2OnCloud:$.db",
+        "file:/server/localdev-config.json:$.db2OnCloud_db"
+      ]
+    }
   },
   "db2OnCloud_dsn": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB For Transactions'][0].credentials.dsn",
-      "env:service_db2OnCloud:$.dsn",
-      "file:/server/localdev-config.json:$.db2OnCloud_dsn"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB For Transactions'][0].credentials.dsn",
+        "env:service_db2OnCloud:$.dsn",
+        "file:/server/localdev-config.json:$.db2OnCloud_dsn"
+      ]
+    }
   },
   "db2OnCloud_host": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB For Transactions'][0].credentials.host",
-      "env:service_db2OnCloud:$.host",
-      "file:/server/localdev-config.json:$.db2OnCloud_host"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB For Transactions'][0].credentials.host",
+        "env:service_db2OnCloud:$.host",
+        "file:/server/localdev-config.json:$.db2OnCloud_host"
+      ]
+    }
   },
   "db2OnCloud_hostname": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB For Transactions'][0].credentials.hostname",
-      "env:service_db2OnCloud:$.hostname",
-      "file:/server/localdev-config.json:$.db2OnCloud_hostname"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB For Transactions'][0].credentials.hostname",
+        "env:service_db2OnCloud:$.hostname",
+        "file:/server/localdev-config.json:$.db2OnCloud_hostname"
+      ]
+    }
   },
   "db2OnCloud_https_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB For Transactions'][0].credentials.https_url",
-      "env:service_db2OnCloud:$.https_url",
-      "file:/server/localdev-config.json:$.db2OnCloud_https_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB For Transactions'][0].credentials.https_url",
+        "env:service_db2OnCloud:$.https_url",
+        "file:/server/localdev-config.json:$.db2OnCloud_https_url"
+      ]
+    }
   },
   "db2OnCloud_jdbcurl": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB For Transactions'][0].credentials.jdbcurl",
-      "env:service_db2OnCloud:$.jdbcurl",
-      "file:/server/localdev-config.json:$.db2OnCloud_jdbcurl"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB For Transactions'][0].credentials.jdbcurl",
+        "env:service_db2OnCloud:$.jdbcurl",
+        "file:/server/localdev-config.json:$.db2OnCloud_jdbcurl"
+      ]
+    }
   },
   "db2OnCloud_password": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB For Transactions'][0].credentials.password",
-      "env:service_db2OnCloud:$.password",
-      "file:/server/localdev-config.json:$.db2OnCloud_password"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB For Transactions'][0].credentials.password",
+        "env:service_db2OnCloud:$.password",
+        "file:/server/localdev-config.json:$.db2OnCloud_password"
+      ]
+    }
   },
   "db2OnCloud_port": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB For Transactions'][0].credentials.port",
-      "env:service_db2OnCloud:$.port",
-      "file:/server/localdev-config.json:$.db2OnCloud_port"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB For Transactions'][0].credentials.port",
+        "env:service_db2OnCloud:$.port",
+        "file:/server/localdev-config.json:$.db2OnCloud_port"
+      ]
+    }
   },
   "db2OnCloud_ssldsn": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB For Transactions'][0].credentials.ssldsn",
-      "env:service_db2OnCloud:$.ssldsn",
-      "file:/server/localdev-config.json:$.db2OnCloud_ssldsn"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB For Transactions'][0].credentials.ssldsn",
+        "env:service_db2OnCloud:$.ssldsn",
+        "file:/server/localdev-config.json:$.db2OnCloud_ssldsn"
+      ]
+    }
   },
   "db2OnCloud_ssljdbcurl": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB For Transactions'][0].credentials.ssljdbcurl",
-      "env:service_db2OnCloud:$.ssljdbcurl",
-      "file:/server/localdev-config.json:$.db2OnCloud_ssljdbcurl"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB For Transactions'][0].credentials.ssljdbcurl",
+        "env:service_db2OnCloud:$.ssljdbcurl",
+        "file:/server/localdev-config.json:$.db2OnCloud_ssljdbcurl"
+      ]
+    }
   },
   "db2OnCloud_uri": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB For Transactions'][0].credentials.uri",
-      "env:service_db2OnCloud:$.uri",
-      "file:/server/localdev-config.json:$.db2OnCloud_uri"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB For Transactions'][0].credentials.uri",
+        "env:service_db2OnCloud:$.uri",
+        "file:/server/localdev-config.json:$.db2OnCloud_uri"
+      ]
+    }
   },
   "db2OnCloud_username": {
-    "searchPatterns": [
-      "cloudfoundry:$['dashDB For Transactions'][0].credentials.username",
-      "env:service_db2OnCloud:$.username",
-      "file:/server/localdev-config.json:$.db2OnCloud_username"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['dashDB For Transactions'][0].credentials.username",
+        "env:service_db2OnCloud:$.username",
+        "file:/server/localdev-config.json:$.db2OnCloud_username"
+      ]
+    }
   },
   "discovery_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['discovery'][0].credentials.url",
-      "env:service_discovery:$.url",
-      "file:/server/localdev-config.json:$.discovery_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['discovery'][0].credentials.url",
+        "env:service_discovery:$.url",
+        "file:/server/localdev-config.json:$.discovery_url"
+      ]
+    }
   },
   "discovery_username": {
-    "searchPatterns": [
-      "cloudfoundry:$['discovery'][0].credentials.username",
-      "env:service_discovery:$.username",
-      "file:/server/localdev-config.json:$.discovery_username"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['discovery'][0].credentials.username",
+        "env:service_discovery:$.username",
+        "file:/server/localdev-config.json:$.discovery_username"
+      ]
+    }
   },
   "discovery_password": {
-    "searchPatterns": [
-      "cloudfoundry:$['discovery'][0].credentials.password",
-      "env:service_discovery:$.password",
-      "file:/server/localdev-config.json:$.discovery_password"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['discovery'][0].credentials.password",
+        "env:service_discovery:$.password",
+        "file:/server/localdev-config.json:$.discovery_password"
+      ]
+    }
   },
   "documentConversion_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['documentConversion'][0].credentials.url",
-      "env:service_documentConversion:$.url",
-      "file:/server/localdev-config.json:$.documentConversion_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['documentConversion'][0].credentials.url",
+        "env:service_documentConversion:$.url",
+        "file:/server/localdev-config.json:$.documentConversion_url"
+      ]
+    }
   },
   "documentConversion_username": {
-    "searchPatterns": [
-      "cloudfoundry:$['documentConversion'][0].credentials.username",
-      "env:service_documentConversion:$.username",
-      "file:/server/localdev-config.json:$.documentConversion_username"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['documentConversion'][0].credentials.username",
+        "env:service_documentConversion:$.username",
+        "file:/server/localdev-config.json:$.documentConversion_username"
+      ]
+    }
   },
   "documentConversion_password": {
-    "searchPatterns": [
-      "cloudfoundry:$['documentConversion'][0].credentials.password",
-      "env:service_documentConversion:$.password",
-      "file:/server/localdev-config.json:$.documentConversion_password"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['documentConversion'][0].credentials.password",
+        "env:service_documentConversion:$.password",
+        "file:/server/localdev-config.json:$.documentConversion_password"
+      ]
+    }
   },
   "historicalInstrumentAnalytics_uri": {
-    "searchPatterns": [
-      "cloudfoundry:$['fss-historical-instrument-analytics-service'][0].credentials.uri",
-      "env:service_historicalInstrumentAnalytics:$.uri",
-      "file:/server/localdev-config.json:$.historicalInstrumentAnalytics_uri"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['fss-historical-instrument-analytics-service'][0].credentials.uri",
+        "env:service_historicalInstrumentAnalytics:$.uri",
+        "file:/server/localdev-config.json:$.historicalInstrumentAnalytics_uri"
+      ]
+    }
   },
   "historicalInstrumentAnalytics_accessToken": {
-    "searchPatterns": [
-      "cloudfoundry:$['fss-historical-instrument-analytics-service'][0].credentials.accessToken",
-      "env:service_historicalInstrumentAnalytics:$.accessToken",
-      "file:/server/localdev-config.json:$.historicalInstrumentAnalytics_accessToken"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['fss-historical-instrument-analytics-service'][0].credentials.accessToken",
+        "env:service_historicalInstrumentAnalytics:$.accessToken",
+        "file:/server/localdev-config.json:$.historicalInstrumentAnalytics_accessToken"
+      ]
+    }
   },
   "instrumentAnalytics_uri": {
-    "searchPatterns": [
-      "cloudfoundry:$['fss-instrument-analytics-service'][0].credentials.uri",
-      "env:service_instrumentAnalytics:$.uri",
-      "file:/server/localdev-config.json:$.instrumentAnalytics_uri"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['fss-instrument-analytics-service'][0].credentials.uri",
+        "env:service_instrumentAnalytics:$.uri",
+        "file:/server/localdev-config.json:$.instrumentAnalytics_uri"
+      ]
+    }
   },
   "instrumentAnalytics_accessToken": {
-    "searchPatterns": [
-      "cloudfoundry:$['fss-instrument-analytics-service'][0].credentials.accessToken",
-      "env:service_instrumentAnalytics:$.accessToken",
-      "file:/server/localdev-config.json:$.instrumentAnalytics_accessToken"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['fss-instrument-analytics-service'][0].credentials.accessToken",
+        "env:service_instrumentAnalytics:$.accessToken",
+        "file:/server/localdev-config.json:$.instrumentAnalytics_accessToken"
+      ]
+    }
   },
   "investmentPortfolio_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['fss-portfolio-service''][0].credentials.url",
-      "env:service_investmentPortfolio:$.url",
-      "file:/server/localdev-config.json:$.investmentPortfolio_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['fss-portfolio-service''][0].credentials.url",
+        "env:service_investmentPortfolio:$.url",
+        "file:/server/localdev-config.json:$.investmentPortfolio_url"
+      ]
+    }
   },
   "investmentPortfolio_reader": {
-    "searchPatterns": [
-      "cloudfoundry:$['fss-portfolio-service''][0].credentials.reader",
-      "env:service_investmentPortfolio:$.reader",
-      "file:/server/localdev-config.json:$.investmentPortfolio_reader"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['fss-portfolio-service''][0].credentials.reader",
+        "env:service_investmentPortfolio:$.reader",
+        "file:/server/localdev-config.json:$.investmentPortfolio_reader"
+      ]
+    }
   },
   "investmentPortfolio_writer": {
-    "searchPatterns": [
-      "cloudfoundry:$['fss-portfolio-service''][0].credentials.writer",
-      "env:service_investmentPortfolio:$.writer",
-      "file:/server/localdev-config.json:$.investmentPortfolio_writer"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['fss-portfolio-service''][0].credentials.writer",
+        "env:service_investmentPortfolio:$.writer",
+        "file:/server/localdev-config.json:$.investmentPortfolio_writer"
+      ]
+    }
   },
   "languageTranslator_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['languageTranslator'][0].credentials.url",
-      "env:service_languageTranslator:$.url",
-      "file:/server/localdev-config.json:$.languageTranslator_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['languageTranslator'][0].credentials.url",
+        "env:service_languageTranslator:$.url",
+        "file:/server/localdev-config.json:$.languageTranslator_url"
+      ]
+    }
   },
   "languageTranslator_username": {
-    "searchPatterns": [
-      "cloudfoundry:$['languageTranslator'][0].credentials.username",
-      "env:service_languageTranslator:$.username",
-      "file:/server/localdev-config.json:$.languageTranslator_username"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['languageTranslator'][0].credentials.username",
+        "env:service_languageTranslator:$.username",
+        "file:/server/localdev-config.json:$.languageTranslator_username"
+      ]
+    }
   },
   "languageTranslator_password": {
-    "searchPatterns": [
-      "cloudfoundry:$['languageTranslator'][0].credentials.password",
-      "env:service_languageTranslator:$.password",
-      "file:/server/localdev-config.json:$.languageTranslator_password"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['languageTranslator'][0].credentials.password",
+        "env:service_languageTranslator:$.password",
+        "file:/server/localdev-config.json:$.languageTranslator_password"
+      ]
+    }
   },
   "mongodb_db_type": {
-    "searchPatterns": [
-      "cloudfoundry:$['compose-for-mongodb'][0].credentials.db_type",
-      "env:service_mongodb:$.db_type",
-      "file:/server/localdev-config.json:$.mongodb_db_type"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['compose-for-mongodb'][0].credentials.db_type",
+        "env:service_mongodb:$.db_type",
+        "file:/server/localdev-config.json:$.mongodb_db_type"
+      ]
+    }
   },
   "mongodb_maps": {
-    "searchPatterns": [
-      "cloudfoundry:$['compose-for-mongodb'][0].credentials.maps",
-      "env:service_mongodb:$.maps",
-      "file:/server/localdev-config.json:$.mongodb_maps"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['compose-for-mongodb'][0].credentials.maps",
+        "env:service_mongodb:$.maps",
+        "file:/server/localdev-config.json:$.mongodb_maps"
+      ]
+    }
   },
   "mongodb_name": {
-    "searchPatterns": [
-      "cloudfoundry:$['compose-for-mongodb'][0].credentials.name",
-      "env:service_mongodb:$.name",
-      "file:/server/localdev-config.json:$.mongodb_name"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['compose-for-mongodb'][0].credentials.name",
+        "env:service_mongodb:$.name",
+        "file:/server/localdev-config.json:$.mongodb_name"
+      ]
+    }
   },
   "mongodb_uri_cli": {
-    "searchPatterns": [
-      "cloudfoundry:$['compose-for-mongodb'][0].credentials.uri_cli",
-      "env:service_mongodb:$.uri_cli",
-      "file:/server/localdev-config.json:$.mongodb_uri_cli"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['compose-for-mongodb'][0].credentials.uri_cli",
+        "env:service_mongodb:$.uri_cli",
+        "file:/server/localdev-config.json:$.mongodb_uri_cli"
+      ]
+    }
   },
   "mongodb_ca_certificate_base64": {
-    "searchPatterns": [
-      "cloudfoundry:$['compose-for-mongodb'][0].credentials.ca_certificate_base64",
-      "env:service_mongodb:$.ca_certificate_base64",
-      "file:/server/localdev-config.json:$.mongodb_ca_certificate_base64"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['compose-for-mongodb'][0].credentials.ca_certificate_base64",
+        "env:service_mongodb:$.ca_certificate_base64",
+        "file:/server/localdev-config.json:$.mongodb_ca_certificate_base64"
+      ]
+    }
   },
   "mongodb_deployment_id": {
-    "searchPatterns": [
-      "cloudfoundry:$['compose-for-mongodb'][0].credentials.deployment_id",
-      "env:service_mongodb:$.deployment_id",
-      "file:/server/localdev-config.json:$.mongodb_deployment_id"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['compose-for-mongodb'][0].credentials.deployment_id",
+        "env:service_mongodb:$.deployment_id",
+        "file:/server/localdev-config.json:$.mongodb_deployment_id"
+      ]
+    }
   },
   "mongodb_uri": {
-    "searchPatterns": [
-      "cloudfoundry:$['compose-for-mongodb'][0].credentials.uri",
-      "env:service_mongodb:$.uri",
-      "file:/server/localdev-config.json:$.mongodb_uri"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['compose-for-mongodb'][0].credentials.uri",
+        "env:service_mongodb:$.uri",
+        "file:/server/localdev-config.json:$.mongodb_uri"
+      ]
+    }
   },
   "naturalLanguageClassifier_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['naturalLanguageClassifier'][0].credentials.url",
-      "env:service_naturalLanguageClassifier:$.url",
-      "file:/server/localdev-config.json:$.naturalLanguageClassifier_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['naturalLanguageClassifier'][0].credentials.url",
+        "env:service_naturalLanguageClassifier:$.url",
+        "file:/server/localdev-config.json:$.naturalLanguageClassifier_url"
+      ]
+    }
   },
   "naturalLanguageClassifier_username": {
-    "searchPatterns": [
-      "cloudfoundry:$['naturalLanguageClassifier'][0].credentials.username",
-      "env:service_naturalLanguageClassifier:$.username",
-      "file:/server/localdev-config.json:$.naturalLanguageClassifier_username"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['naturalLanguageClassifier'][0].credentials.username",
+        "env:service_naturalLanguageClassifier:$.username",
+        "file:/server/localdev-config.json:$.naturalLanguageClassifier_username"
+      ]
+    }
   },
   "naturalLanguageClassifier_password": {
-    "searchPatterns": [
-      "cloudfoundry:$['naturalLanguageClassifier'][0].credentials.password",
-      "env:service_naturalLanguageClassifier:$.password",
-      "file:/server/localdev-config.json:$.naturalLanguageClassifier_password"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['naturalLanguageClassifier'][0].credentials.password",
+        "env:service_naturalLanguageClassifier:$.password",
+        "file:/server/localdev-config.json:$.naturalLanguageClassifier_password"
+      ]
+    }
   },
   "naturalLanguageUnderstanding_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['naturalLanguageUnderstanding'][0].credentials.url",
-      "env:service_naturalLanguageUnderstanding:$.url",
-      "file:/server/localdev-config.json:$.naturalLanguageUnderstanding_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['naturalLanguageUnderstanding'][0].credentials.url",
+        "env:service_naturalLanguageUnderstanding:$.url",
+        "file:/server/localdev-config.json:$.naturalLanguageUnderstanding_url"
+      ]
+    }
   },
   "naturalLanguageUnderstanding_username": {
-    "searchPatterns": [
-      "cloudfoundry:$['naturalLanguageUnderstanding'][0].credentials.username",
-      "env:service_naturalLanguageUnderstanding:$.username",
-      "file:/server/localdev-config.json:$.naturalLanguageUnderstanding_username"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['naturalLanguageUnderstanding'][0].credentials.username",
+        "env:service_naturalLanguageUnderstanding:$.username",
+        "file:/server/localdev-config.json:$.naturalLanguageUnderstanding_username"
+      ]
+    }
   },
   "naturalLanguageUnderstanding_password": {
-    "searchPatterns": [
-      "cloudfoundry:$['naturalLanguageUnderstanding'][0].credentials.password",
-      "env:service_naturalLanguageUnderstanding:$.password",
-      "file:/server/localdev-config.json:$.naturalLanguageUnderstanding_password"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['naturalLanguageUnderstanding'][0].credentials.password",
+        "env:service_naturalLanguageUnderstanding:$.password",
+        "file:/server/localdev-config.json:$.naturalLanguageUnderstanding_password"
+      ]
+    }
   },
   "objectStorage_auth_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['Object-Storage'][0].credentials.auth_url",
-      "env:service_objectStorage:$.auth_url",
-      "file:/server/localdev-config.json:$.objectStorage_auth_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['Object-Storage'][0].credentials.auth_url",
+        "env:service_objectStorage:$.auth_url",
+        "file:/server/localdev-config.json:$.objectStorage_auth_url"
+      ]
+    }
   },
   "objectStorage_domainId": {
-    "searchPatterns": [
-      "cloudfoundry:$['Object-Storage'][0].credentials.domainId",
-      "env:service_objectStorage:$.domainId",
-      "file:/server/localdev-config.json:$.objectStorage_domainId"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['Object-Storage'][0].credentials.domainId",
+        "env:service_objectStorage:$.domainId",
+        "file:/server/localdev-config.json:$.objectStorage_domainId"
+      ]
+    }
   },
   "objectStorage_domainName": {
-    "searchPatterns": [
-      "cloudfoundry:$['Object-Storage'][0].credentials.domainName",
-      "env:service_objectStorage:$.domainName",
-      "file:/server/localdev-config.json:$.objectStorage_domainName"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['Object-Storage'][0].credentials.domainName",
+        "env:service_objectStorage:$.domainName",
+        "file:/server/localdev-config.json:$.objectStorage_domainName"
+      ]
+    }
   },
   "objectStorage_password": {
-    "searchPatterns": [
-      "cloudfoundry:$['Object-Storage'][0].credentials.password",
-      "env:service_objectStorage:$.password",
-      "file:/server/localdev-config.json:$.objectStorage_password"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['Object-Storage'][0].credentials.password",
+        "env:service_objectStorage:$.password",
+        "file:/server/localdev-config.json:$.objectStorage_password"
+      ]
+    }
   },
   "objectStorage_project": {
-    "searchPatterns": [
-      "cloudfoundry:$['Object-Storage'][0].credentials.project",
-      "env:service_objectStorage:$.project",
-      "file:/server/localdev-config.json:$.objectStorage_project"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['Object-Storage'][0].credentials.project",
+        "env:service_objectStorage:$.project",
+        "file:/server/localdev-config.json:$.objectStorage_project"
+      ]
+    }
   },
   "objectStorage_projectId": {
-    "searchPatterns": [
-      "cloudfoundry:$['Object-Storage'][0].credentials.projectId",
-      "env:service_objectStorage:$.projectId",
-      "file:/server/localdev-config.json:$.objectStorage_projectId"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['Object-Storage'][0].credentials.projectId",
+        "env:service_objectStorage:$.projectId",
+        "file:/server/localdev-config.json:$.objectStorage_projectId"
+      ]
+    }
   },
   "objectStorage_region": {
-    "searchPatterns": [
-      "cloudfoundry:$['Object-Storage'][0].credentials.region",
-      "env:service_objectStorage:$.region",
-      "file:/server/localdev-config.json:$.objectStorage_region"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['Object-Storage'][0].credentials.region",
+        "env:service_objectStorage:$.region",
+        "file:/server/localdev-config.json:$.objectStorage_region"
+      ]
+    }
   },
   "objectStorage_role": {
-    "searchPatterns": [
-      "cloudfoundry:$['Object-Storage'][0].credentials.role",
-      "env:service_objectStorage:$.role",
-      "file:/server/localdev-config.json:$.objectStorage_role"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['Object-Storage'][0].credentials.role",
+        "env:service_objectStorage:$.role",
+        "file:/server/localdev-config.json:$.objectStorage_role"
+      ]
+    }
   },
   "objectStorage_userId": {
-    "searchPatterns": [
-      "cloudfoundry:$['Object-Storage'][0].credentials.userId",
-      "env:service_objectStorage:$.userId",
-      "file:/server/localdev-config.json:$.objectStorage_userId"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['Object-Storage'][0].credentials.userId",
+        "env:service_objectStorage:$.userId",
+        "file:/server/localdev-config.json:$.objectStorage_userId"
+      ]
+    }
   },
   "objectStorage_username": {
-    "searchPatterns": [
-      "cloudfoundry:$['Object-Storage'][0].credentials.username",
-      "env:service_objectStorage:$.username",
-      "file:/server/localdev-config.json:$.objectStorage_username"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['Object-Storage'][0].credentials.username",
+        "env:service_objectStorage:$.username",
+        "file:/server/localdev-config.json:$.objectStorage_username"
+      ]
+    }
   },
   "personalityInsights_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['personalityInsights'][0].credentials.url",
-      "env:service_personalityInsights:$.url",
-      "file:/server/localdev-config.json:$.personalityInsights_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['personalityInsights'][0].credentials.url",
+        "env:service_personalityInsights:$.url",
+        "file:/server/localdev-config.json:$.personalityInsights_url"
+      ]
+    }
   },
   "personalityInsights_username": {
-    "searchPatterns": [
-      "cloudfoundry:$['personalityInsights'][0].credentials.username",
-      "env:service_personalityInsights:$.username",
-      "file:/server/localdev-config.json:$.personalityInsights_username"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['personalityInsights'][0].credentials.username",
+        "env:service_personalityInsights:$.username",
+        "file:/server/localdev-config.json:$.personalityInsights_username"
+      ]
+    }
   },
   "personalityInsights_password": {
-    "searchPatterns": [
-      "cloudfoundry:$['personalityInsights'][0].credentials.password",
-      "env:service_personalityInsights:$.password",
-      "file:/server/localdev-config.json:$.personalityInsights_password"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['personalityInsights'][0].credentials.password",
+        "env:service_personalityInsights:$.password",
+        "file:/server/localdev-config.json:$.personalityInsights_password"
+      ]
+    }
   },
   "portfolioOptimization_uri": {
-    "searchPatterns": [
-      "cloudfoundry:$['fss-portfolio-optimization-service'][0].credentials.uri",
-      "env:service_portfolioOptimization:$.uri",
-      "file:/server/localdev-config.json:$.portfolioOptimization_uri"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['fss-portfolio-optimization-service'][0].credentials.uri",
+        "env:service_portfolioOptimization:$.uri",
+        "file:/server/localdev-config.json:$.portfolioOptimization_uri"
+      ]
+    }
   },
   "portfolioOptimization_accessToken": {
-    "searchPatterns": [
-      "cloudfoundry:$['fss-portfolio-optimization-service'][0].credentials.accessToken",
-      "env:service_portfolioOptimization:$.accessToken",
-      "file:/server/localdev-config.json:$.portfolioOptimization_accessToken"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['fss-portfolio-optimization-service'][0].credentials.accessToken",
+        "env:service_portfolioOptimization:$.accessToken",
+        "file:/server/localdev-config.json:$.portfolioOptimization_accessToken"
+      ]
+    }
   },
   "postgresql_uri": {
-    "searchPatterns": [
-      "cloudfoundry:$['compose-for-postgresql'][0].credentials.uri",
-      "env:service_postgresql:$.uri",
-      "file:/server/localdev-config.json:$.postgresql_uri"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['compose-for-postgresql'][0].credentials.uri",
+        "env:service_postgresql:$.uri",
+        "file:/server/localdev-config.json:$.postgresql_uri"
+      ]
+    }
   },
   "postgresql_ca_certificate_base64": {
-    "searchPatterns": [
-      "cloudfoundry:$['compose-for-postgresql'][0].credentials.ca_certificate_base64",
-      "env:service_postgresql:$.ca_certificate_base64",
-      "file:/server/localdev-config.json:$.postgresql_ca_certificate_base64"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['compose-for-postgresql'][0].credentials.ca_certificate_base64",
+        "env:service_postgresql:$.ca_certificate_base64",
+        "file:/server/localdev-config.json:$.postgresql_ca_certificate_base64"
+      ]
+    }
   },
   "postgresql_deployment_id": {
-    "searchPatterns": [
-      "cloudfoundry:$['compose-for-postgresql'][0].credentials.deployment_id",
-      "env:service_postgresql:$.deployment_id",
-      "file:/server/localdev-config.json:$.postgresql_deployment_id"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['compose-for-postgresql'][0].credentials.deployment_id",
+        "env:service_postgresql:$.deployment_id",
+        "file:/server/localdev-config.json:$.postgresql_deployment_id"
+      ]
+    }
   },
   "predictiveMarketScenarios_uri": {
-    "searchPatterns": [
-      "cloudfoundry:$['fss-predictive-scenario-analytics-service'][0].credentials.uri",
-      "env:service_predictiveMarketScenarios:$.uri",
-      "file:/server/localdev-config.json:$.predictiveMarketScenarios_uri"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['fss-predictive-scenario-analytics-service'][0].credentials.uri",
+        "env:service_predictiveMarketScenarios:$.uri",
+        "file:/server/localdev-config.json:$.predictiveMarketScenarios_uri"
+      ]
+    }
   },
   "predictiveMarketScenarios_accessToken": {
-    "searchPatterns": [
-      "cloudfoundry:$['fss-predictive-scenario-analytics-service'][0].credentials.accessToken",
-      "env:service_predictiveMarketScenarios:$.accessToken",
-      "file:/server/localdev-config.json:$.predictiveMarketScenarios_accessToken"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['fss-predictive-scenario-analytics-service'][0].credentials.accessToken",
+        "env:service_predictiveMarketScenarios:$.accessToken",
+        "file:/server/localdev-config.json:$.predictiveMarketScenarios_accessToken"
+      ]
+    }
   },
   "push_appGuid": {
-    "searchPatterns": [
-      "cloudfoundry:$['imfpush'][0].credentials.appGuid",
-      "env:service_push:$.appGuid",
-      "file:/server/localdev-config.json:$.push_appGuid"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['imfpush'][0].credentials.appGuid",
+        "env:service_push:$.appGuid",
+        "file:/server/localdev-config.json:$.push_appGuid"
+      ]
+    }
   },
   "push_appSecret": {
-    "searchPatterns": [
-      "cloudfoundry:$['imfpush'][0].credentials.appSecret",
-      "env:service_push:$.appSecret",
-      "file:/server/localdev-config.json:$.push_appSecret"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['imfpush'][0].credentials.appSecret",
+        "env:service_push:$.appSecret",
+        "file:/server/localdev-config.json:$.push_appSecret"
+      ]
+    }
   },
   "push_clientSecret": {
-    "searchPatterns": [
-      "cloudfoundry:$['imfpush'][0].credentials.clientSecret",
-      "env:service_push:$.clientSecret",
-      "file:/server/localdev-config.json:$.push_clientSecret"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['imfpush'][0].credentials.clientSecret",
+        "env:service_push:$.clientSecret",
+        "file:/server/localdev-config.json:$.push_clientSecret"
+      ]
+    }
   },
   "push_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['imfpush'][0].credentials.url",
-      "env:service_push:$.url",
-      "file:/server/localdev-config.json:$.push_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['imfpush'][0].credentials.url",
+        "env:service_push:$.url",
+        "file:/server/localdev-config.json:$.push_url"
+      ]
+    }
   },
   "redis_uri": {
-    "searchPatterns": [
-      "cloudfoundry:$['compose-for-redis'][0].credentials.uri",
-      "env:service_redis:$.uri",
-      "file:/server/localdev-config.json:$.redis_uri"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['compose-for-redis'][0].credentials.uri",
+        "env:service_redis:$.uri",
+        "file:/server/localdev-config.json:$.redis_uri"
+      ]
+    }
   },
   "retrieveAndRank_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['retrieveAndRank'][0].credentials.url",
-      "env:service_retrieveAndRank:$.url",
-      "file:/server/localdev-config.json:$.retrieveAndRank_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['retrieveAndRank'][0].credentials.url",
+        "env:service_retrieveAndRank:$.url",
+        "file:/server/localdev-config.json:$.retrieveAndRank_url"
+      ]
+    }
   },
   "retrieveAndRank_username": {
-    "searchPatterns": [
-      "cloudfoundry:$['retrieveAndRank'][0].credentials.username",
-      "env:service_retrieveAndRank:$.username",
-      "file:/server/localdev-config.json:$.retrieveAndRank_username"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['retrieveAndRank'][0].credentials.username",
+        "env:service_retrieveAndRank:$.username",
+        "file:/server/localdev-config.json:$.retrieveAndRank_username"
+      ]
+    }
   },
   "retrieveAndRank_password": {
-    "searchPatterns": [
-      "cloudfoundry:$['retrieveAndRank'][0].credentials.password",
-      "env:service_retrieveAndRank:$.password",
-      "file:/server/localdev-config.json:$.retrieveAndRank_password"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['retrieveAndRank'][0].credentials.password",
+        "env:service_retrieveAndRank:$.password",
+        "file:/server/localdev-config.json:$.retrieveAndRank_password"
+      ]
+    }
   },
   "simulatedHistoricalInstrumentAnalytics_uri": {
-    "searchPatterns": [
-      "cloudfoundry:$['fss-historical-scenario-analytics-service'][0].credentials.uri",
-      "env:service_simulatedHistoricalInstrumentAnalytics:$.uri",
-      "file:/server/localdev-config.json:$.simulatedHistoricalInstrumentAnalytics_uri"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['fss-historical-scenario-analytics-service'][0].credentials.uri",
+        "env:service_simulatedHistoricalInstrumentAnalytics:$.uri",
+        "file:/server/localdev-config.json:$.simulatedHistoricalInstrumentAnalytics_uri"
+      ]
+    }
   },
   "simulatedHistoricalInstrumentAnalytics_accessToken": {
-    "searchPatterns": [
-      "cloudfoundry:$['fss-historical-scenario-analytics-service'][0].credentials.accessToken",
-      "env:service_simulatedHistoricalInstrumentAnalytics:$.accessToken",
-      "file:/server/localdev-config.json:$.simulatedHistoricalInstrumentAnalytics_accessToken"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['fss-historical-scenario-analytics-service'][0].credentials.accessToken",
+        "env:service_simulatedHistoricalInstrumentAnalytics:$.accessToken",
+        "file:/server/localdev-config.json:$.simulatedHistoricalInstrumentAnalytics_accessToken"
+      ]
+    }
   },
   "simulatedInstrumentAnalytics_uri": {
-    "searchPatterns": [
-      "cloudfoundry:$['fss-scenario-analytics-service'][0].credentials.uri",
-      "env:service_simulatedInstrumentAnalytics:$.uri",
-      "file:/server/localdev-config.json:$.simulatedInstrumentAnalytics_uri"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['fss-scenario-analytics-service'][0].credentials.uri",
+        "env:service_simulatedInstrumentAnalytics:$.uri",
+        "file:/server/localdev-config.json:$.simulatedInstrumentAnalytics_uri"
+      ]
+    }
   },
   "simulatedInstrumentAnalytics_accessToken": {
-    "searchPatterns": [
-      "cloudfoundry:$['fss-scenario-analytics-service'][0].credentials.accessToken",
-      "env:service_simulatedInstrumentAnalytics:$.accessToken",
-      "file:/server/localdev-config.json:$.simulatedInstrumentAnalytics_accessToken"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['fss-scenario-analytics-service'][0].credentials.accessToken",
+        "env:service_simulatedInstrumentAnalytics:$.accessToken",
+        "file:/server/localdev-config.json:$.simulatedInstrumentAnalytics_accessToken"
+      ]
+    }
   },
   "speechToText_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['speechToText'][0].credentials.url",
-      "env:service_speechToText:$.url",
-      "file:/server/localdev-config.json:$.speechToText_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['speechToText'][0].credentials.url",
+        "env:service_speechToText:$.url",
+        "file:/server/localdev-config.json:$.speechToText_url"
+      ]
+    }
   },
   "speechToText_username": {
-    "searchPatterns": [
-      "cloudfoundry:$['speechToText'][0].credentials.username",
-      "env:service_speechToText:$.username",
-      "file:/server/localdev-config.json:$.speechToText_username"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['speechToText'][0].credentials.username",
+        "env:service_speechToText:$.username",
+        "file:/server/localdev-config.json:$.speechToText_username"
+      ]
+    }
   },
   "speechToText_password": {
-    "searchPatterns": [
-      "cloudfoundry:$['speechToText'][0].credentials.password",
-      "env:service_speechToText:$.password",
-      "file:/server/localdev-config.json:$.speechToText_password"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['speechToText'][0].credentials.password",
+        "env:service_speechToText:$.password",
+        "file:/server/localdev-config.json:$.speechToText_password"
+      ]
+    }
   },
   "textToSpeech_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['textToSpeech'][0].credentials.url",
-      "env:service_textToSpeech:$.url",
-      "file:/server/localdev-config.json:$.textToSpeech_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['textToSpeech'][0].credentials.url",
+        "env:service_textToSpeech:$.url",
+        "file:/server/localdev-config.json:$.textToSpeech_url"
+      ]
+    }
   },
   "textToSpeech_username": {
-    "searchPatterns": [
-      "cloudfoundry:$['textToSpeech'][0].credentials.username",
-      "env:service_textToSpeech:$.username",
-      "file:/server/localdev-config.json:$.textToSpeech_username"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['textToSpeech'][0].credentials.username",
+        "env:service_textToSpeech:$.username",
+        "file:/server/localdev-config.json:$.textToSpeech_username"
+      ]
+    }
   },
   "textToSpeech_password": {
-    "searchPatterns": [
-      "cloudfoundry:$['textToSpeech'][0].credentials.password",
-      "env:service_textToSpeech:$.password",
-      "file:/server/localdev-config.json:$.textToSpeech_password"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['textToSpeech'][0].credentials.password",
+        "env:service_textToSpeech:$.password",
+        "file:/server/localdev-config.json:$.textToSpeech_password"
+      ]
+    }
   },
   "toneAnalyzer_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['toneAnalyzer'][0].credentials.url",
-      "env:service_toneAnalyzer:$.url",
-      "file:/server/localdev-config.json:$.toneAnalyzer_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['toneAnalyzer'][0].credentials.url",
+        "env:service_toneAnalyzer:$.url",
+        "file:/server/localdev-config.json:$.toneAnalyzer_url"
+      ]
+    }
   },
   "toneAnalyzer_username": {
-    "searchPatterns": [
-      "cloudfoundry:$['toneAnalyzer'][0].credentials.username",
-      "env:service_toneAnalyzer:$.username",
-      "file:/server/localdev-config.json:$.toneAnalyzer_username"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['toneAnalyzer'][0].credentials.username",
+        "env:service_toneAnalyzer:$.username",
+        "file:/server/localdev-config.json:$.toneAnalyzer_username"
+      ]
+    }
   },
   "toneAnalyzer_password": {
-    "searchPatterns": [
-      "cloudfoundry:$['toneAnalyzer'][0].credentials.password",
-      "env:service_toneAnalyzer:$.password",
-      "file:/server/localdev-config.json:$.toneAnalyzer_password"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['toneAnalyzer'][0].credentials.password",
+        "env:service_toneAnalyzer:$.password",
+        "file:/server/localdev-config.json:$.toneAnalyzer_password"
+      ]
+    }
   },
   "visualRecognition_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['visualRecognition'][0].credentials.url",
-      "env:service_visualRecognition:$.url",
-      "file:/server/localdev-config.json:$.visualRecognition_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['visualRecognition'][0].credentials.url",
+        "env:service_visualRecognition:$.url",
+        "file:/server/localdev-config.json:$.visualRecognition_url"
+      ]
+    }
   },
   "visualRecognition_api_key": {
-    "searchPatterns": [
-      "cloudfoundry:$['visualRecognition'][0].credentials.api_key",
-      "env:service_visualRecognition:$.api_key",
-      "file:/server/localdev-config.json:$.visualRecognition_api_key"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['visualRecognition'][0].credentials.api_key",
+        "env:service_visualRecognition:$.api_key",
+        "file:/server/localdev-config.json:$.visualRecognition_api_key"
+      ]
+    }
   },
   "visualRecognition_note": {
-    "searchPatterns": [
-      "cloudfoundry:$['visualRecognition'][0].credentials.note",
-      "env:service_visualRecognition:$.note",
-      "file:/server/localdev-config.json:$.visualRecognition_note"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['visualRecognition'][0].credentials.note",
+        "env:service_visualRecognition:$.note",
+        "file:/server/localdev-config.json:$.visualRecognition_note"
+      ]
+    }
   },
   "weatherInsights_host": {
-    "searchPatterns": [
-      "cloudfoundry:$['weatherinsights'][0].credentials.host",
-      "env:service_weatherInsights:$.host",
-      "file:/server/localdev-config.json:$.weatherInsights_host"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['weatherinsights'][0].credentials.host",
+        "env:service_weatherInsights:$.host",
+        "file:/server/localdev-config.json:$.weatherInsights_host"
+      ]
+    }
   },
   "weatherInsights_password": {
-    "searchPatterns": [
-      "cloudfoundry:$['weatherinsights'][0].credentials.password",
-      "env:service_weatherInsights:$.password",
-      "file:/server/localdev-config.json:$.weatherInsights_password"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['weatherinsights'][0].credentials.password",
+        "env:service_weatherInsights:$.password",
+        "file:/server/localdev-config.json:$.weatherInsights_password"
+      ]
+    }
   },
   "weatherInsights_port": {
-    "searchPatterns": [
-      "cloudfoundry:$['weatherinsights'][0].credentials.port",
-      "env:service_weatherInsights:$.port",
-      "file:/server/localdev-config.json:$.weatherInsights_port"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['weatherinsights'][0].credentials.port",
+        "env:service_weatherInsights:$.port",
+        "file:/server/localdev-config.json:$.weatherInsights_port"
+      ]
+    }
   },
   "weatherInsights_url": {
-    "searchPatterns": [
-      "cloudfoundry:$['weatherinsights'][0].credentials.url",
-      "env:service_weatherInsights:$.url",
-      "file:/server/localdev-config.json:$.weatherInsights_url"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['weatherinsights'][0].credentials.url",
+        "env:service_weatherInsights:$.url",
+        "file:/server/localdev-config.json:$.weatherInsights_url"
+      ]
+    }
   },
   "weatherInsights_username": {
-    "searchPatterns": [
-      "cloudfoundry:$['weatherinsights'][0].credentials.username",
-      "env:service_weatherInsights:$.username",
-      "file:/server/localdev-config.json:$.weatherInsights_username"
-    ]
+    "credentials": {
+      "searchPatterns": [
+        "cloudfoundry:$['weatherinsights'][0].credentials.username",
+        "env:service_weatherInsights:$.username",
+        "file:/server/localdev-config.json:$.weatherInsights_username"
+      ]
+    }
   }
 }
