@@ -63,7 +63,7 @@ describe('swift-kitura', function () {
 		});
 
 		it('Can add Auth/AppID instrumentation', () => {
-			testAll('service-auth', 'auth', optionsBluemix.auth.serviceInfo.name, {
+			testAll('service-appid', 'appid', optionsBluemix.auth.serviceInfo.name, {
 				[optionsBluemix.auth.serviceInfo.name]: {
 					tenantId: optionsBluemix.auth.tenantId,
 					clientId: optionsBluemix.auth.clientId,
@@ -85,7 +85,7 @@ describe('swift-kitura', function () {
 		});
 
 		it('Can add Object Storage instrumentation', () => {
-			testAll('service-objectStorage', 'objectStorage', optionsBluemix.objectStorage[0].serviceInfo.name, {
+			testAll('service-object-storage', 'object_storage', optionsBluemix.objectStorage[0].serviceInfo.name, {
 				[optionsBluemix.objectStorage[0].serviceInfo.name]: {
 					projectId: optionsBluemix.objectStorage[0].projectId,
 					userId: optionsBluemix.objectStorage[0].userId,
@@ -112,7 +112,7 @@ describe('swift-kitura', function () {
 		});
 
 		it('Can add Conversation instrumentation', () => {
-			testAll('service-conversation', 'conversation', optionsBluemix.conversation.serviceInfo.name, {
+			testAll('service-watson-conversation', 'watson_conversation', optionsBluemix.conversation.serviceInfo.name, {
 				[optionsBluemix.conversation.serviceInfo.name]: {
 					username: optionsBluemix.conversation.username,
 					password: optionsBluemix.conversation.password,
@@ -133,7 +133,7 @@ describe('swift-kitura', function () {
 		});
 
 		it('Can add Alert Notification instrumentation', () => {
-			testAll('service-alertNotification', 'alertNotification', optionsBluemix.alertNotification.serviceInfo.name, {
+			testAll('service-alert-notification', 'alert_notification', optionsBluemix.alertNotification.serviceInfo.name, {
 				[optionsBluemix.alertNotification.serviceInfo.name]: {
 					name: optionsBluemix.alertNotification.name,
 					password: optionsBluemix.alertNotification.password,
@@ -143,7 +143,7 @@ describe('swift-kitura', function () {
 		});
 
 		it('Can add PostgreSQL instrumentation', () => {
-			testAll('service-postgresql', 'postgresql', optionsBluemix.postgresql.serviceInfo.name, {
+			testAll('service-postgre', 'postgre', optionsBluemix.postgresql.serviceInfo.name, {
 				[optionsBluemix.postgresql.serviceInfo.name]: {
 					uri: optionsBluemix.postgresql.uri
 				}
@@ -264,89 +264,52 @@ function testServiceDependencies(serviceName, dependencies) {
 
 function testServiceModules(serviceName, modules) {
 	let serviceVariable = {
-		"service-alertNotification": "AlertNotifications",
-		"service-auth": "BluemixAppID",
+		"service-alert-notification": "AlertNotifications",
+		"service-appid": "BluemixAppID",
 		"service-autoscaling": "",
 		"service-cloudant": "CouchDB",
-		"service-objectStorage": "BluemixObjectStorage",
+		"service-object-storage": "BluemixObjectStorage",
 		"service-redis": "SwiftRedis",
 		"service-mongodb": "MongoKitten",
-		"service-postgresql": "SwiftKueryPostgreSQL",
-		"service-push": "BluemixPushNotifications",
-		"service-conversation": "WatsonDeveloperCloud"
+		"service-postgre": "SwiftKueryPostgreSQL",
+		"service-push": "IBMPushNotifications",
+		"service-watson-conversation": "WatsonDeveloperCloud"
 	};
 	const module = "\"" + `${serviceVariable[serviceName]}` + "\"";
 	yassert(modules.indexOf(module) !== -1, 'expected module ' + module);
 }
 
 function testServiceInstrumentation(serviceName, servLookupKey, codeForServices) {
-
-	/**
-	 * Map between scaffolder keys and legacy service keys
-	 * @type {{auth: string, conversation: string, alertNotification: string, cloudant: string, mongodb: string, objectStorage: string, postgresql: string, push: string, redis: string}}
-	 */
-	let serviceLookupMap = {
-		"auth": "appid",
-		"conversation": "watson_conversation",
-		"alertNotification": "alert_notification",
-		"cloudant": "cloudant",
-		"mongodb": "mongodb",
-		"objectStorage": "object_storage",
-		"postgresql": "postgre",
-		"push": "push",
-		"redis": "redis"
-	};
-
-
 	let serviceVariable = {
-		"service-alertNotification": "alertNotificationService",
-		"service-auth": "appidService",
+		"service-alert-notification": "alertNotificationService",
+		"service-appid": "appidService",
 		"service-cloudant": "couchDBService",
-		"service-objectStorage": "objectStorageService",
+		"service-object-storage": "objectStorageService", 
 		"service-redis": "redisService",
 		"service-mongodb": "mongoDBService",
-		"service-postgresql": "postgreSQLService",
+		"service-postgre": "postgreSQLService",
 		"service-push": "pushNotificationService",
-		"service-conversation": "watsonConversationService"
+		"service-watson-conversation": "watsonConversationService"
 	};
 
 	function pascalize(name) {
-		if (name.indexOf('-') > -1) {
-			name = name.substring(0, name.indexOf('-')) + name[name.indexOf('-') + 1].toUpperCase() + name.substring(name.indexOf('-') + 2);
-		}
-		return name[0].toUpperCase() + name.substring(1); //return name.split('-').map(part => part.charAt(0).toUpperCase() + part.substring(1).toLowerCase()).join('');
+		return name.split('-').map(part => part.charAt(0).toUpperCase() + part.substring(1).toLowerCase()).join('');
 	}
 
-	let expectedInitFunctionDeclaration = `initializeService${pascalize(servLookupKey)}(cloudEnv: cloudEnv)`;
-	let expectedInitFunctionTemplate = `initializeService${pascalize(servLookupKey)}(cloudEnv: CloudEnv)`;
+	let expectedInitFunctionDeclaration = `initialize${pascalize(serviceName)}(cloudEnv: cloudEnv)`;
+	let expectedInitFunctionTemplate = `initialize${pascalize(serviceName)}(cloudEnv: CloudEnv)`;
 
 	yassert(codeForServices.indexOf(`${serviceVariable[serviceName]} = try ${expectedInitFunctionDeclaration}`) !== -1);
 
-	yassert.fileContent(`Sources/Application/Services/Service${pascalize(servLookupKey)}.swift`, `name: "${serviceLookupMap[servLookupKey]}"`);
-	yassert.fileContent(`Sources/Application/Services/Service${pascalize(servLookupKey)}.swift`, `func ${expectedInitFunctionTemplate}`);
+	yassert.fileContent(`Sources/Application/Services/${pascalize(serviceName)}.swift`, `name: "${servLookupKey}"`);
+	yassert.fileContent(`Sources/Application/Services/${pascalize(serviceName)}.swift`, `func ${expectedInitFunctionTemplate}`);
 
 }
 
 function testMappings(servLookupKey, servInstanceName) {
-	/**
-	 * Map between scaffolder keys and legacy service keys
-	 * @type {{auth: string, conversation: string, alertNotification: string, cloudant: string, mongodb: string, objectStorage: string, postgresql: string, push: string, redis: string}}
-	 */
-	let serviceLookupMap = {
-		"auth": "appid",
-		"conversation": "watson_conversation",
-		"alertNotification": "alert_notification",
-		"cloudant": "cloudant",
-		"mongodb": "mongodb",
-		"objectStorage": "object_storage",
-		"postgresql": "postgre",
-		"push": "push",
-		"redis": "redis"
-	};
-
 	const envVariableName = servInstanceName.replace(/-/g, "_");
 	const expectedMappings = {
-		[serviceLookupMap[servLookupKey]]: {
+		[servLookupKey]: {
 			credentials: {
 				searchPatterns: [
 					"cloudfoundry:" + servInstanceName,
