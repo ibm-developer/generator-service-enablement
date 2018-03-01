@@ -1,15 +1,15 @@
 {
 	"mongodb_uri":{
 		"searchPatterns": [
-			"cloudfoundry:$['compose-for-mongodb'][0].credentials.uri",
-			"env:service_mongodb:$.uri",
+			"cloudfoundry:$['hsdbaas-for-mongodb'][0].credentials.url",
+			"env:service_mongodb:$.url",
 			"file:/server/localdev-config.json:$.mongodb_uri"
 		]
 	},
 	"mongodb_ca":{
 		"searchPatterns": [
-			"cloudfoundry:$['compose-for-mongodb'][0].credentials.ca_certificate_base64",
-			"env:service_mongdb:$.ca_certificate_base64",
+			"cloudfoundry:$['hsdbaas-for-mongodb'][0].credentials.cert",
+			"env:service_mongdb:$.cert",
 			"file:/server/localdev-config.json:$.mongodb_ca"
 		]
 	}
