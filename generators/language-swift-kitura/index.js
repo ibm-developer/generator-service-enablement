@@ -1,10 +1,11 @@
-'use strict'
+'use strict';
 const logger = require('log4js').getLogger("generator-service-enablement:language-swift-kitura");
 const Generator = require('yeoman-generator');
 const handlebars = require('handlebars');
 const path = require('path');
-
+const fs = require('fs');
 const Utils = require('../lib/Utils');
+const scaffolderMapping = require('../resources/scaffolderMapping.json');
 
 // Load mappings between bluemix/scaffolder labels and the labels generated in the localdev-config.json files
 const bluemixLabelMappings = require('./bluemix-label-mappings.json');
@@ -26,36 +27,38 @@ module.exports = class extends Generator {
 	}
 
 	initializing() {
+		let serviceCredentials,
+			scaffolderKey,
+			serviceKey;
 		this.context.dependenciesFile = "dependencies.txt";
 		this.context.languageFileExt = ".swift";
-
+		//this.context.generatorLocation = GENERATOR_LOCATION;
 		this.context.addDependencies = this._addDependencies.bind(this);
 		this.context.addMappings = this._addMappings.bind(this);
 		this.context.addLocalDevConfig = this._addLocalDevConfig.bind(this);
 		this.context.addReadMe = this._addReadMe.bind(this);
 		this.context.addInstrumentation = this._addInstrumentation.bind(this);
-		// Security Services
-		this.composeWith(require.resolve('../service-appid'), {context: this.context});
 
-		// Cloud Data * Storage Services
-		this.composeWith(require.resolve('../service-cloudant'), {context: this.context});
-		this.composeWith(require.resolve('../service-object-storage'), {context: this.context});
-		this.composeWith(require.resolve('../service-redis'), {context: this.context});
-		this.composeWith(require.resolve('../service-postgre'), {context: this.context});
-		this.composeWith(require.resolve('../service-mongodb'), {context: this.context});
 
-		// Watson Services
-		this.composeWith(require.resolve('../service-watson-conversation'), {context: this.context});
-
-		// Mobile
-		this.composeWith(require.resolve('../service-push'), {context: this.context});
-
-		// DevOps
-		this.composeWith(require.resolve('../service-alert-notification'), {context: this.context});
-		this.composeWith(require.resolve('../service-autoscaling'), {context: this.context});
-
-		// Additional services go here...
-		//TODO: Add remaining services here; see: https://ibm.box.com/s/7o7w68ydat8ape2u5dzoid89qdgh56qh
+		let root = path.join(path.dirname(require.resolve('../app')), '../');
+		let folders = fs.readdirSync(root);
+		folders.forEach(folder => {
+			if (folder.startsWith('service-')) {
+				serviceKey = folder.substring(folder.indexOf('-') + 1);
+				scaffolderKey = scaffolderMapping[serviceKey];
+				serviceCredentials = Array.isArray(this.context.bluemix[scaffolderKey])
+					? this.context.bluemix[scaffolderKey][0] : this.context.bluemix[scaffolderKey];
+				logger.debug("Composing with service : " + folder);
+				try {
+					this.context.cloudLabel = serviceCredentials && serviceCredentials.serviceInfo && serviceCredentials.serviceInfo.cloudLabel;
+					this.composeWith(path.join(root, folder), {context: this.context});
+				} catch (err) {
+					/* istanbul ignore next */      //ignore for code coverage as this is just a warning - if the service fails to load the subsequent service test will fail
+					logger.warn('Unable to compose with service', folder, err);
+				}
+			}
+		});
+		
 	}
 
 	_addDependencies(serviceDependenciesString) {
@@ -86,7 +89,7 @@ module.exports = class extends Generator {
 		this.fs.write(destinationFilePath, handlebars.compile(this.fs.read(sourceFilePath))(locals));
 	}
 
-	_addReadMe(options){
+	_addReadMe(options) {
 		this.fs.copy(
 			options.sourceFilePath,
 			this.destinationPath() + "/docs/services/" + options.targetFileName
@@ -96,16 +99,23 @@ module.exports = class extends Generator {
 	_addInstrumentation(options) {
 		function pascalize(name) {
 			return name.split('-').map(part => part.charAt(0).toUpperCase() + part.substring(1).toLowerCase()).join('');
+		/*	if (name.indexOf('-') > -1) {
+				name = name.substring(0, name.indexOf('-')) + name[name.indexOf('-') + 1].toUpperCase() + name.substring(name.indexOf('-') + 2);
+			}
+			return name[0].toUpperCase() + name.substring(1);
+*/
 		}
+
 		if (this.context.injectIntoApplication) {
 			let extension = path.extname(options.targetFileName);
 			let targetName = pascalize(path.basename(options.targetFileName, extension));
+
 			// Copy source file
 			let targetFilePath = this.destinationPath('Sources', 'Application', 'Services', targetName + this.context.languageFileExt);
 			this._copyHbsTpl(
 				options.sourceFilePath,
 				targetFilePath,
-				{ servLookupKey: bluemixLabelMappings[options.servLabel], context: this.context }
+				{servLookupKey: bluemixLabelMappings[options.servLabel], context: this.context}
 			);
 			let metaFile = options.sourceFilePath.substring(0, options.sourceFilePath.lastIndexOf("/")) + '/meta.json';
 			let metaData = this.fs.readJSON(metaFile);
@@ -114,19 +124,19 @@ module.exports = class extends Generator {
 			// 'initializeMyService()'. For example, if the targetFileName is 'service-appid.swift'
 			// then the function will be 'initializeServiceAppid()'
 			// this.context.injectIntoApplication({ service: `try initialize${targetName}()` });
-			this.context.injectIntoApplication({ service_import: `import ${metaData.import}` });
-			this.context.injectIntoApplication({ service_variable: `public let ${metaData.variableName}: ${metaData.type}` });
-			this.context.injectIntoApplication({ service: `${metaData.variableName} = try initialize${targetName}(cloudEnv: cloudEnv)` });
+			this.context.injectIntoApplication({service_import: `import ${metaData.import}`});
+			this.context.injectIntoApplication({service_variable: `public let ${metaData.variableName}: ${metaData.type}`});
+			this.context.injectIntoApplication({service: `${metaData.variableName} = try initialize${targetName}(cloudEnv: cloudEnv)`});
 			// Injecting modules to Package.swift
-			if(this.context.injectModules){
-				if(metaData.variableName === 'appidService'){
+			if (this.context.injectModules) {
+				if (metaData.variableName === 'appidService') {
 					metaData.import = 'BluemixAppID';
-				}else if(metaData.variableName === 'autoScalingService'){
+				} else if (metaData.variableName === 'autoScalingService') {
 					metaData.import = '';
-				}else if(metaData.variableName === 'watsonConversationService'){
+				} else if (metaData.variableName === 'watsonConversationService') {
 					metaData.import = 'WatsonDeveloperCloud';
 				}
-				if(metaData.import !== ''){
+				if (metaData.import !== '') {
 					metaData.import = "\"" + metaData.import + "\"";
 					this.context.injectModules(metaData.import);
 				}
@@ -139,6 +149,10 @@ module.exports = class extends Generator {
 	_getServiceInstanceName(bluemixKey) {
 		// Lookup metadata object using bluemix/scaffolder key
 		const serviceMetaData = this.context.bluemix[bluemixKey];
+
+		if(!serviceMetaData){
+			return null;
+		}
 		//logger.info("stringfy: " + JSON.stringify(this.context.bluemix[bluemixKey]));
 		const instanceName = Array.isArray(serviceMetaData) ?
 			serviceMetaData[0].serviceInfo.name : serviceMetaData.serviceInfo.name;
@@ -152,11 +166,13 @@ module.exports = class extends Generator {
 		// Note that environment variables should not use the '-' character
 		const envVariableName = instanceName.replace(/-/g, "_");
 		mappings[prefix] = {
-			"searchPatterns": [
-				"cloudfoundry:" + instanceName,
-				"env:" + envVariableName,
-				FILE_SEARCH_PATH_PREFIX + instanceName
-			]
+			"credentials": {
+				"searchPatterns": [
+					"cloudfoundry:" + instanceName,
+					"env:" + envVariableName,
+					FILE_SEARCH_PATH_PREFIX + instanceName
+				]
+			}
 		};
 		return serviceCredentials;
 	}
@@ -167,6 +183,7 @@ module.exports = class extends Generator {
 		// Load the generated localdev-config.json
 		// We will "massage" this file so it is compatible with CloudEnvironment
 		const localDevConfig = this.fs.readJSON(this.destinationPath(PATH_LOCALDEV_CONFIG_FILE), {});
+
 		// Get all keys from localdev-config.json
 		const credentialItems = Object.keys(localDevConfig);
 		// Initialize structure for storing credentials
@@ -182,9 +199,9 @@ module.exports = class extends Generator {
 		}
 
 		for (let index in credentialItems) {
-			const credentialItem = credentialItems[index]
+			const credentialItem = credentialItems[index];
 			logger.debug("-----------------------------");
-			logger.debug(credentialItem + ": " + localDevConfig[credentialItem]);
+			logger.log(credentialItem + ": " + localDevConfig[credentialItem]);
 
 			// Look up prefix and bluemix key for current credentials item
 			let currentPrefix;
@@ -209,6 +226,11 @@ module.exports = class extends Generator {
 			// Generate entry for mappings.json
 			const instanceName = this._getServiceInstanceName(bluemixKey);
 
+			if(!instanceName){
+				logger.error(`Service ${bluemixKey} was not provisioned`);
+				continue;
+			}
+
 			// Are we processing a new credentials set or an existing one?
 			let serviceCredentials;
 			if (lastPrefix !== currentPrefix) {
@@ -229,14 +251,14 @@ module.exports = class extends Generator {
 		this.fs.writeJSON(this.destinationPath(PATH_MAPPINGS_FILE), mappings);
 	}
 
-	writing(){
+	writing() {
 		//Stopgap solution while we get both approaches for laying down credentials:
 		//fine-grained vs. coarse-grained
 		this._transformCredentialsOutput();
 
 		// Add PATH_LOCALDEV_CONFIG_FILE to .gitignore
 		let gitIgnorePath = this.destinationPath(PATH_GIT_IGNORE);
-		if (this.fs.exists(gitIgnorePath)){
+		if (this.fs.exists(gitIgnorePath)) {
 			this.fs.append(gitIgnorePath, PATH_LOCALDEV_CONFIG_FILE);
 		} else {
 			this.fs.write(gitIgnorePath, PATH_LOCALDEV_CONFIG_FILE);
@@ -246,6 +268,9 @@ module.exports = class extends Generator {
 	end() {
 		// add services env to deployment.yaml && cf create-service to pipeline.yaml
 		return Utils.addServicesEnvToDeploymentYamlAsync({context: this.context, destinationPath: this.destinationPath()})
-			.then(() => Utils.addServicesToPipelineYamlAsync({context: this.context, destinationPath: this.destinationPath()}));
+			.then(() => Utils.addServicesToPipelineYamlAsync({
+				context: this.context,
+				destinationPath: this.destinationPath()
+			}));
 	}
 };
