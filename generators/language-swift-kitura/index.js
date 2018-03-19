@@ -121,10 +121,10 @@ module.exports = class extends Generator {
 			if (metaImport !== undefined) {
 				this.context.injectIntoApplication({ service_import: `import ${metaImport}` });
 			}
-			if (metaData.variableName !== undefined && metaData.type !== undefined && metaData.targetName !== undefined) {
+			if (metaData.variableName !== undefined  && metaData.type !== undefined && targetName !== undefined) {
 				this.context.injectIntoApplication({ service_variable: `public let ${metaData.variableName}: ${metaData.type}` });
-				this.context.injectIntoApplication({ service: `${metaData.variableName} = try initialize${targetName}(cloudEnv: cloudEnv)` });
-			} else if (metaData.targetName !== undefined) {
+				this.context.injectIntoApplication({ service: `${metaData.variableName} = try initialize${targetName}(cloudEnv: cloudEnv)` }); 
+			} else if (targetName !== undefined) {
 				this.context.injectIntoApplication({ service: `try initialize${targetName}(cloudEnv: cloudEnv)` });
 			}
 			// Injecting modules to Package.swift
