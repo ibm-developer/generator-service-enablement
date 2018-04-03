@@ -28,30 +28,21 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 <a name="0.11.0"></a>
-# [0.11.0](https://github.com/ibm-developer/generator-ibm-service-enablement/compare/v0.9.7...v0.11.0) (2018-03-19)
+# [0.11.0](https://github.com/ibm-developer/generator-ibm-service-enablement/compare/v0.11.0...v0.11.0) (2018-03-19)
 
 
 ### Bug Fixes
 
-* **swift label mappings:** Updates hypersecuredb label mappings ([be578fd](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/be578fd))
 * Empty dependency Package.swift ([f90f029](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/f90f029))
-* modification for kubernetes binding names in swift chart and mappings ([494af48](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/494af48))
-
 
 ### Features
 
-* Add orm to Postgre Service ([9387407](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/9387407))
+* Add orm to Postgre Service ([9387407](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/9387407)) [duplicate]
 
 
 
 <a name="0.10.0"></a>
-# [0.10.0](https://github.com/ibm-developer/generator-ibm-service-enablement/compare/v0.9.7...v0.10.0) (2018-03-19)
-
-
-### Bug Fixes
-
-* **swift label mappings:** Updates hypersecuredb label mappings ([be578fd](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/be578fd))
-* modification for kubernetes binding names in swift chart and mappings ([494af48](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/494af48))
+# [0.10.0](https://github.com/ibm-developer/generator-ibm-service-enablement/compare/v0.9.8...v0.10.0) (2018-03-19)
 
 
 ### Features
@@ -68,7 +59,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 * **swift label mappings:** Updates hypersecuredb label mappings ([be578fd](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/be578fd))
 * modification for kubernetes binding names in swift chart and mappings ([494af48](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/494af48))
-
 
 
 <a name="0.9.7"></a>
