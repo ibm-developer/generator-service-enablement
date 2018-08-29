@@ -34,7 +34,7 @@ describe('golang-gin', function () {
 		yassert.file('services/services.go');
 	});
 	
-	/*it('Can add Watson - Assistant instrumentation', () => {
+	it('Can add Watson - Assistant instrumentation', () => {
 		testAll('watson-assistant', {
 			watson_assistant_url: optionsBluemix.conversation.url,
 			watson_assistant_username: optionsBluemix.conversation.username,
@@ -112,7 +112,7 @@ describe('golang-gin', function () {
 			watson_visual_recognition_api_key: optionsBluemix.visualRecognition.api_key
 		});
 	});
-*/
+
 	
 	it('Can run generation with no services', (done) => {
 		for (let key in optionsBluemix) {
