@@ -2,6 +2,89 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.1"></a>
+## [3.0.1](https://github.com/ibm-developer/generator-ibm-service-enablement/compare/v3.0.0...v3.0.1) (2018-09-26)
+
+
+### Bug Fixes
+
+* add condition for file existence ([8a006e2](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/8a006e2))
+* add condition for file existence ([86ee36d](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/86ee36d))
+* add unit tests for appid ([c1844fd](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/c1844fd))
+* add unit tests for appid ([da35ae3](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/da35ae3))
+* apply appid node instrumentation only to web apps ([56dc697](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/56dc697))
+* apply appid node instrumentation only to web apps ([238b866](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/238b866))
+* fixing cloudObjectStorage devexId ([9e82591](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/9e82591))
+* fixing cloudObjectStorage devexId ([fece581](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/fece581))
+* get apptype from starter option ([23349e3](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/23349e3))
+* get apptype from starter option ([2e27005](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/2e27005))
+* handle condition of missing landing page ([2b98faf](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/2b98faf))
+* handle condition of missing landing page ([4009429](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/4009429))
+* only copy appid html when lang is node ([59ea575](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/59ea575))
+* only copy appid html when lang is node ([459d359](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/459d359))
+* update comment ([570ee9f](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/570ee9f))
+* update comment ([e1beb0a](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/e1beb0a))
+
+
+
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/ibm-developer/generator-ibm-service-enablement/compare/v2.5.1...v3.0.0) (2018-09-14)
+
+
+### Bug Fixes
+
+* appease linter ([a75afcb](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/a75afcb))
+* appease linter ([d3be6f6](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/d3be6f6))
+* deleted the go test folder because it no longer exists in develop ([256de36](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/256de36))
+* got rid of ejs tags ([0ff0c76](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/0ff0c76))
+* got rid of ejs tags in generators/language-go ([d8c952d](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/d8c952d))
+* got rid of some print statements ([da0c502](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/da0c502))
+* update assistant binding for java ([a47bf63](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/a47bf63))
+* update assistant binding for node ([4c8bc09](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/4c8bc09))
+* update assistant binding for python ([24c9376](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/24c9376))
+* Update java-spring to use ibm-cloud-spring-boot-service-bind ([3a0e06e](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/3a0e06e))
+* update mocha to v4 to fix vulneratility issues ([5566850](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/5566850))
+* use scoped cloudant package ([0db4a3b](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/0db4a3b))
+* Use v1.1.1 of ibm-cloud-spring-boot-service-bind ([fdf54b2](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/fdf54b2))
+
+
+### Features
+
+* update appid sdk to v4.0 ([df131b9](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/df131b9))
+
+
+### BREAKING CHANGES
+
+* update version of appid sdk for node
+
+
+
+<a name="2.5.1"></a>
+## [2.5.1](https://github.com/ibm-developer/generator-ibm-service-enablement/compare/v2.5.0...v2.5.1) (2018-08-16)
+
+
+### Bug Fixes
+
+* **visualRec:** fix typo ([54e79ad](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/54e79ad))
+
+
+
+<a name="2.5.0"></a>
+# [2.5.0](https://github.com/ibm-developer/generator-ibm-service-enablement/compare/v2.4.5...v2.5.0) (2018-08-06)
+
+
+### Bug Fixes
+
+* added comments to instrumentaion files and formatted code ([c54c923](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/c54c923))
+* swiftserver mapping production for non-supported services ([720b899](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/720b899))
+
+
+### Features
+
+* add golang functionality ([b3c1886](https://github.com/ibm-developer/generator-ibm-service-enablement/commit/b3c1886))
+
+
+
 <a name="2.4.5"></a>
 ## [2.4.5](https://github.com/ibm-developer/generator-ibm-service-enablement/compare/v2.4.4...v2.4.5) (2018-07-19)
 

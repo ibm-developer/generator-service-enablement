@@ -4,6 +4,7 @@ const WebAppStrategy = require('ibmcloud-appid').WebAppStrategy;
 const userProfileManager = require("ibmcloud-appid").UserProfileManager;
 const session = require('express-session')
 const passport = require('passport');
+const fs = require('fs-extra');
 
 module.exports = function (app, serviceManager) {
 
@@ -43,7 +44,7 @@ module.exports = function (app, serviceManager) {
 		clientId: IBMCloudEnv.getString('appid_client_id'),
 		secret: IBMCloudEnv.getString('appid_secret'),
 		oauthServerUrl: IBMCloudEnv.getString('appid_oauth_server_url'),
-		redirectUri: serviceManager.get('auth-redirect-uri') || defaultRedirectUri
+		redirectUri: serviceManager.get('appid-redirect-uri') || defaultRedirectUri
 	});
 
 	passport.use(webStrategy);
@@ -84,6 +85,20 @@ module.exports = function (app, serviceManager) {
 	app.get("/protected", passport.authenticate(WebAppStrategy.STRATEGY_NAME), function (req, res) {
 		res.json(req.user);
 	});
+
+	if (fs.existsSync("public/index.html")) {
+		app.get('/', function (req, res) {
+			var indexData = fs.readFileSync("public/index.html", 'utf8');
+			try {
+				var appidData = fs.readFileSync("public/appid.html", 'utf8');
+				var result = indexData.replace(/<!-- placeholder appid login -->/g, appidData);
+				res.send(result);
+			}
+			catch (err) { // if appid.html is not found, return the origin index.html
+				res.send(indexData.valueOf());
+			}
+		});
+	}
 
 	userProfileManager.init({
 		profilesUrl: IBMCloudEnv.getString('appid_profiles_url'),

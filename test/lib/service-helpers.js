@@ -43,25 +43,22 @@ function serviceCloudant(optionsBluemix) {
 function serviceCloudObjectStorage(optionsBluemix) {
 	return {
 		location: `service-cloud-object-storage`,
-		bluemixName: `cloudobjectstorage`,
+		bluemixName: `cloudObjectStorage`,
 		localDevConfig: {
-			cloud_object_storage_apikey: optionsBluemix.cloudobjectstorage.apikey,
-			cloud_object_storage_endpoints: optionsBluemix.cloudobjectstorage.endpoints,
-			cloud_object_storage_iam_apikey_description: optionsBluemix.cloudobjectstorage.iam_apikey_description,
-			cloud_object_storage_iam_apikey_name: optionsBluemix.cloudobjectstorage.iam_apikey_name,
-			cloud_object_storage_iam_role_crn: optionsBluemix.cloudobjectstorage.iam_role_crn,
-			cloud_object_storage_iam_serviceid_crn: optionsBluemix.cloudobjectstorage.iam_serviceid_crn,
-			cloud_object_storage_resource_instance_id: optionsBluemix.cloudobjectstorage.resource_instance_id
+			cloud_object_storage_apikey: optionsBluemix.cloudObjectStorage.apikey,
+			cloud_object_storage_endpoints: optionsBluemix.cloudObjectStorage.endpoints,
+			cloud_object_storage_iam_apikey_description: optionsBluemix.cloudObjectStorage.iam_apikey_description,
+			cloud_object_storage_iam_apikey_name: optionsBluemix.cloudObjectStorage.iam_apikey_name,
+			cloud_object_storage_iam_role_crn: optionsBluemix.cloudObjectStorage.iam_role_crn,
+			cloud_object_storage_iam_serviceid_crn: optionsBluemix.cloudObjectStorage.iam_serviceid_crn,
+			cloud_object_storage_resource_instance_id: optionsBluemix.cloudObjectStorage.resource_instance_id
 		},
 		instrumentation: {
 			java_liberty: [{
 				name: "src/main/java/application/cloudobjectstorage/CloudObjectStorage.java",
 				contents: "@ConfigProperty"
 			}],
-			java_spring: [{
-				name: "src/main/java/application/cloudobjectstorage/CloudObjectStorage.java",
-				contents: "@Autowired"
-			}]
+			java_spring: []
 		}
 	}
 }
@@ -82,7 +79,7 @@ function serviceObjectStorage(optionsBluemix) {
 		instrumentation: {
 			java_liberty: [{name : "src/main/java/application/objectstorage/ObjectStorage.java", contents : "@ConfigProperty"},
 				{name : "src/main/java/application/objectstorage/ObjectStorageCredentials.java"}],
-			java_spring: [{name : "src/main/java/application/objectstorage/ObjectStorageConfig.java", contents : "@Autowired"}]
+			java_spring: []
 		}
 	};
 }
