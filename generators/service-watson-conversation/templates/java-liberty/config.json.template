@@ -1,5 +1,0 @@
-{
-  "dependencies" : [
-    {"groupId" : "com.ibm.watson.developer_cloud", "artifactId" : "assistant", "version" : "6.5.0"}
-  ]
-}

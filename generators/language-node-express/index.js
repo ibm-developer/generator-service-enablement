@@ -5,6 +5,7 @@ const path = require('path');
 
 const Utils = require('../lib/Utils');
 const fs = require('fs');
+const fsExtra = require('fs-extra');
 
 let Generator = require('yeoman-generator');
 
@@ -24,6 +25,7 @@ module.exports = class extends Generator {
 		this.context = opts.context;
 		logger.level = this.context.loggerLevel;
 		logger.debug("Constructing");
+		this.hasInstrumentation = false;
 	}
 
 	configuring(){
@@ -92,6 +94,7 @@ module.exports = class extends Generator {
 	}
 
 	_addInstrumentation(options){
+		this.hasInstrumentation = true;
 		this.fs.copy(
 			options.sourceFilePath,
 			this.destinationPath() + "/server/services/" + options.targetFileName
@@ -112,11 +115,18 @@ module.exports = class extends Generator {
 	}
 
 	end(){
-		// Remove GENERATE_HERE from /server/services/index.js
-		let servicesIndexJsFilePath = this.destinationPath("./server/services/index.js");
-		let indexFileContent = this.fs.read(servicesIndexJsFilePath);
-		indexFileContent = indexFileContent.replace(GENERATE_HERE, "");
-		this.fs.write(servicesIndexJsFilePath, indexFileContent);
+		if (this.hasInstrumentation) {
+			// Remove GENERATE_HERE from /server/services/index.js
+			let servicesIndexJsFilePath = this.destinationPath("./server/services/index.js");
+			let indexFileContent = this.fs.read(servicesIndexJsFilePath);
+			indexFileContent = indexFileContent.replace(GENERATE_HERE, "");
+			this.fs.write(servicesIndexJsFilePath, indexFileContent);
+		} else {
+			// No instrumentation was added so remove the `services` folder
+			const instrumentationFolder = this.destinationPath() + '/server/services';
+			logger.warn('No instrumentation was found, removing to ' + instrumentationFolder);
+			fsExtra.removeSync(instrumentationFolder);
+		}
 
 		// Add PATH_LOCALDEV_CONFIG_FILE to .gitignore
 		let gitIgnorePath = this.destinationPath(PATH_GIT_IGNORE);

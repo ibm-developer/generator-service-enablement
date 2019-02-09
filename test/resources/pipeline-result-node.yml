@@ -106,16 +106,6 @@ stages:
       cf create-service "postgresql-label" "postgresql-plan" "compose-for-postgresql"
       cf create-service "push-label" "push-plan" "imfpush"
       cf create-service "redis-label" "redis-plan" "compose-for-redis"
-      cf create-service "conversation-label" "conversation-plan" "conversation"
-      cf create-service "discovery-label" "discovery-plan" "discovery"
-      cf create-service "language-translator-label" "language-translator-plan" "languageTranslator"
-      cf create-service "natural-language-classifier-label" "natural-language-classifier-plan" "naturalLanguageClassifier"
-      cf create-service "natural-language-understanding-label" "natural-language-understanding-plan" "naturalLanguageUnderstanding"
-      cf create-service "personality-insights-label" "personality-insights-plan" "personalityInsights"
-      cf create-service "speech-to-text-label" "speech-to-text-plan" "speechToText"
-      cf create-service "text-to-speech-label" "text-to-speech-plan" "textToSpeech"
-      cf create-service "tone-analyzer-label" "tone-analyzer-plan" "toneAnalyzer"
-      cf create-service "visual-recognition-label" "visual-recognition-plan" "visualRecognition"
       cf create-service "weather-insights-label" "weather-insights-plan" "weatherinsights"
       {{#if config.pushCommand}}
       {{{config.pushCommand}}}

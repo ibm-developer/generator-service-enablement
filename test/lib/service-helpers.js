@@ -99,22 +99,6 @@ function serviceMongodb(optionsBluemix) {
 	};
 }
 
-function serviceWatsonConversation(optionsBluemix) {
-	return {
-		location: 'service-watson-conversation',
-		bluemixName: 'conversation',
-		localDevConfig: {
-			watson_conversation_url: optionsBluemix.conversation.url,
-			watson_conversation_username: optionsBluemix.conversation.username,
-			watson_conversation_password: optionsBluemix.conversation.password
-		},
-		instrumentation: {
-			java_liberty: [],
-			java_spring: []
-		}
-	};
-}
-
 function servicePush(optionsBluemix) {
 	return {
 		location: 'service-push',
@@ -201,7 +185,6 @@ module.exports = {
 	serviceCloudObjectStorage: serviceCloudObjectStorage,
 	serviceObjectStorage: serviceObjectStorage,
 	serviceMongodb: serviceMongodb,
-	serviceWatsonConversation: serviceWatsonConversation,
 	servicePush: servicePush,
 	serviceAlertNotification: serviceAlertNotification,
 	serviceRedis: serviceRedis,
