@@ -39,6 +39,7 @@ module.exports = class extends Generator {
 		this.context = opts.context;
 		logger.level = this.context.loggerLevel;
 		logger.debug('Constructing');
+		this.hasInstrumentation = false;
 	}
 
 	//setup all the values we need to pass in the context
@@ -136,6 +137,7 @@ module.exports = class extends Generator {
 	}
 
 	_addInstrumentation(instrumentation) {
+		this.hasInstrumentation = true;
 		if (!this.context.instrumentationAdded) {
 			this._addCoreDependencies();
 			this.context.instrumentationAdded = true;

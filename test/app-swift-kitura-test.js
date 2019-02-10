@@ -288,7 +288,6 @@ function testServiceModules(serviceName, modules) {
 		"service-mongodb": "MongoKitten",
 		"service-postgre": "SwiftKueryPostgreSQL",
 		"service-push": "IBMPushNotifications",
-		"service-watson-assistant": "AssistantV1",
 		"service-hypersecure-dbaas-mongodb": "MongoKitten",
 		"service-elephant-sql": "SwiftKueryPostgreSQL",
 	};
@@ -307,7 +306,6 @@ function testServiceInstrumentation(serviceName, servLookupKey, codeForServices)
 		"service-mongodb": "mongoDBService",
 		"service-postgre": "postgreSQLService",
 		"service-push": "pushNotificationService",
-		"service-watson-assistant": "watsonAssistantService",
 		"service-hypersecure-dbaas-mongodb": "mongoDBService",
 		"service-elephant-sql": "elephantSQLService",
 	};
