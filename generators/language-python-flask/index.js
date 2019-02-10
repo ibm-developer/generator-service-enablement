@@ -6,6 +6,7 @@ const Utils = require('../lib/Utils');
 let Generator = require('yeoman-generator');
 
 const fs = require('fs');
+const fsExtra = require('fs-extra');
 const path = require('path');
 const GENERATE_HERE = "# GENERATE HERE";
 const scaffolderMapping = require('../resources/scaffolderMapping.json');
@@ -32,6 +33,7 @@ module.exports = class extends Generator {
 		this.context = opts.context;
 		logger.level = this.context.loggerLevel;
 		logger.debug("Constructing");
+		this.hasInstrumentation = false;
 	}
 
 	configuring() {
@@ -228,6 +230,7 @@ module.exports = class extends Generator {
 	}
 
 	_addInstrumentation(options) {
+		this.hasInstrumentation = true;
 		options.targetFileName = options.targetFileName.replace(/-/g, "_");
 
 		this.fs.copyTpl(
@@ -278,14 +281,18 @@ module.exports = class extends Generator {
 	}
 
 	end() {
-		// Remove GENERATE_HERE and GENERATE_IMPORT_HERE from SERVICES_INIT_FILE
-		let servicesInitFilePath = this.destinationPath("./server/services/" + SERVICES_INIT_FILE);
-		let indexFileContent = this.fs.read(servicesInitFilePath);
-		indexFileContent = indexFileContent.replace(GENERATE_HERE, "").replace(GENERATE_IMPORT_HERE, "");
-		this.fs.write(servicesInitFilePath, indexFileContent);
-
-		// Remove GENERATE_IMPORT_HERE from SERVICES_INIT_FILE
-
+		if (this.hasInstrumentation) {
+			// Remove GENERATE_HERE and GENERATE_IMPORT_HERE from SERVICES_INIT_FILE
+			let servicesInitFilePath = this.destinationPath("./server/services/" + SERVICES_INIT_FILE);
+			let indexFileContent = this.fs.read(servicesInitFilePath);
+			indexFileContent = indexFileContent.replace(GENERATE_HERE, "").replace(GENERATE_IMPORT_HERE, "");
+			this.fs.write(servicesInitFilePath, indexFileContent);
+		} else {
+			// No instrumentation was added so remove the `services` folder
+			const instrumentationFolder = this.destinationPath() + '/server/services';
+			logger.warn('No instrumentation was found, removing to ' + instrumentationFolder);
+			fsExtra.removeSync(instrumentationFolder);
+		}
 		// Add PATH_LOCALDEV_CONFIG_FILE to .gitignore
 		let gitIgnorePath = this.destinationPath(PATH_GIT_IGNORE);
 		if (this.fs.exists(gitIgnorePath)) {
