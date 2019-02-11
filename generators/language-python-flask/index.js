@@ -290,7 +290,7 @@ module.exports = class extends Generator {
 		} else {
 			// No instrumentation was added so remove the `services` folder
 			const instrumentationFolder = this.destinationPath() + '/server/services';
-			logger.warn('No instrumentation was found, removing to ' + instrumentationFolder);
+			logger.warn('No instrumentation was found, removing the folder: ' + instrumentationFolder);
 			fsExtra.removeSync(instrumentationFolder);
 		}
 		// Add PATH_LOCALDEV_CONFIG_FILE to .gitignore
