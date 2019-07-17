@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
-global.DOMParser = new JSDOM().window.DOMParser;
+const DOMParser = new JSDOM().window.DOMParser;
 const XMLSerializer = require('xmlserializer');
 const prettifyxml = require('prettify-xml');
 
@@ -94,7 +94,6 @@ module.exports = class extends Generator {
 				let templateFile = fs.readFileSync(templateFilePath);
 				let template = JSON.parse(templateFile);
 				let pomContents = fs.readFileSync(this.destinationPath() + '/pom.xml', {encoding:'utf-8'});
-				// var xDOM = JSDOM.fromFile(this.destinationPath() + '/pom.xml');
 				let xDOM = new DOMParser().parseFromString(pomContents, 'application/xml');
 				// go through pom.xml and add missing non-provided dependencies from template
 				let xArtifactIds = xDOM.getElementsByTagName("artifactId");
@@ -108,7 +107,7 @@ module.exports = class extends Generator {
 							if (xArtifactId.textContent === artifactId) {
 								depFound = true;
 							}
-						};
+						}
 						if (!depFound) { // add missing dependency to pom
 							let newXGroupId = xDOM.createElement("groupId");
 							newXGroupId.appendChild(xDOM.createTextNode(dep["groupId"]));
