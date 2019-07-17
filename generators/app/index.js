@@ -89,11 +89,12 @@ module.exports = class extends Generator {
 		// add missing pom.xml dependencies when running service enablement standalone
 		if (typeof this.parentContext === "undefined") {
 			let templateFilePath = path.dirname(require.resolve('../language-java')) + "/templates/"+context.language+"/config.json.template";
-			if (fs.existsSync(templateFilePath)) {
+			let pomFilePath = this.destinationPath() + '/pom.xml';
+			if (fs.existsSync(templateFilePath) && fs.existsSync(pomFilePath)) {
 				logger.info("Adding service dependencies");
 				let templateFile = fs.readFileSync(templateFilePath);
 				let template = JSON.parse(templateFile);
-				let pomContents = fs.readFileSync(this.destinationPath() + '/pom.xml', {encoding:'utf-8'});
+				let pomContents = fs.readFileSync(pomFilePath, {encoding:'utf-8'});
 				let xDOM = new DOMParser().parseFromString(pomContents, 'application/xml');
 				// go through pom.xml and add missing non-provided dependencies from template
 				let xArtifactIds = xDOM.getElementsByTagName("artifactId");
