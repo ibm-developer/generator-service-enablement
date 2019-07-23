@@ -89,7 +89,7 @@ function addJavaDependencies() {
 			this.fs.write(this.destinationPath() + '/pom.xml', newXml);
 		}
 	}
-	}
+}
 
 
 module.exports = {
