@@ -57,6 +57,7 @@ module.exports = class extends Generator {
 		this.context.srcFolders = [];
 		this.context.instrumentationAdded = false;
 		this.context.metainf = [];
+		this._addJavaDependencies = javaUtils.addJavaDependencies.bind(this);
 
 		//initializing ourselves by composing with the service generators
 		let root = path.join(path.dirname(require.resolve('../app')), '../');
@@ -103,7 +104,12 @@ module.exports = class extends Generator {
 			} else {
 				this.fs.write(destPath, output);
 			}
-		})
+		});
+
+		// add missing pom.xml dependencies when running service enablement standalone
+		if (typeof this.context.parentContext === "undefined") {
+			this._addJavaDependencies();
+		}
 	}
 
 
