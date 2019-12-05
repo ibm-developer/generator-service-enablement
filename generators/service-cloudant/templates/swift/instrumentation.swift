@@ -9,7 +9,7 @@ func initializeServiceCloudant(cloudEnv: CloudEnv) throws -> CouchDBClient {
     }
     let connectionProperties = ConnectionProperties(
         host: cloudantCredentials.host,
-        port: Int16(cloudantCredentials.port),
+        port: UInt16(cloudantCredentials.port),
         secured: cloudantCredentials.secured,
         username: cloudantCredentials.username,
         password: cloudantCredentials.password
