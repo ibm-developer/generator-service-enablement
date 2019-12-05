@@ -1,1 +1,1 @@
-.package(url: "https://github.com/OpenKitten/MongoKitten.git", from: "5.1.11"),
+.package(url: "https://github.com/OpenKitten/MongoKitten.git", from: "6.0.3"),
